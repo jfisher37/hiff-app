@@ -69,7 +69,7 @@
 
   #homepage {
     display: flex;
-    margin-top: 50px;
+    margin-top: 40px;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
@@ -97,7 +97,7 @@
   /* about us */
 
   #about-us {
-    margin-top: 70px;
+    margin-top: 40px;
     width: 100%;
   }
 
