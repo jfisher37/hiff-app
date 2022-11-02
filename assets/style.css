@@ -84,9 +84,8 @@
     color: var(--navy);
   }
 
-  /* homepage */
-
-  #homepage {
+  /* main */
+  #main {
     display: flex;
     margin-top: 40px;
     flex-direction: column;
@@ -96,6 +95,9 @@
     margin-bottom: 2rem;
     position: relative;
   }
+
+ /* homepage: */
+
 /* homepage img ul */
   #homepage-images {
     display: flex;

@@ -1,12 +1,14 @@
+import homepage from "../pages/homepage.js";
+
 const pageHandler = async () => {
   //create relevant dom els
   const pageListEl = document.getElementById("footer-list");
   const pageIconEls = Array.from(pageListEl.getElementsByTagName("li"));
 
   //async imports of relevant modules:
-//   const homePage = await import("../pages/homepage.js").then(async (module) => {
-//     return await module.default;
-//   });
+  const homePage = await import("../pages/homepage.js").then(async (module) => {
+    return await module.default;
+  });
 
 //   const projectsPage = await import("../pages/settingsPage.js").then(async (module) => {
 //     return await module.default;
@@ -28,15 +30,13 @@ const pageHandler = async () => {
       icon.setAttribute("class", "page-selected");
 
       //load page related to icon
-    //   if (icon.dataset.page === "home") {
-    //     mainPage();
-    //   } else if (icon.dataset.page === "friends") {
-    //     friendsPage();
-    //   } else if (icon.dataset.page === "settings") {
-    //     settingsPage();
-    //   } else if (icon.dataset.page === "logout") {
-    //     logout();
-    //   }
+      if (icon.dataset.page === "homepage") {
+        homepage();
+      } else if (icon.dataset.page === "projects") {
+        console.log("projects coming");
+      } else if (icon.dataset.page === "partners") {
+        console.log("partners coming");
+      } 
     });
   });
 };
