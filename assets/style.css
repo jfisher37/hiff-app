@@ -4,6 +4,7 @@
     --purple: #642e75;
     --yellow: #fccc16;
     --navy: #0c3655;
+    font-size: 20px;
   }
 
   body {
@@ -11,19 +12,31 @@
     color: black;
     font-family: 'Open Sans', sans-serif;
     font-size: 20px;
-    display: flex;
+    display: grid;
+    grid-template-columns: [start] 100% [end];
+    grid-template-rows: [header-start] 17% [header-end main-start] auto [main-end footer-start] 3.5rem [footer-end];
     flex-direction: column;
     align-items: center;
+    height: 100%;
+  }
+
+  /* main grid */
+
+  main {
+    grid-column: start / end;
+    grid-row: main-start / main-end;
   }
 
   /* Header */
   header {
     display: flex;
     justify-content: center;
+    grid-column: start / end;
+    grid-row: header-start / header-end;
   }
 
   #org-name {
-    font-size: 2em;
+    font-size: 2rem;
     margin-top: 10px;
     font-weight: 800;
     color: var(--orange);
@@ -37,8 +50,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 3.5em;
+    height: 3.5rem;
     background-color: var(--orange);
+    grid-column: start / end;
+    grid-row: footer-start / footer-end;
   }
 
   #footer-list{
@@ -49,7 +64,7 @@
     color: white;
   }
 
-  .footer-icon {
+  #footer-list li {
     display: flex;
     height: 100%;
     flex-direction: column;
@@ -57,12 +72,16 @@
   }
 
   .footer-icon i{
-    font-size: 1.5em;
+    font-size: 1.5rem;
     margin-bottom: 5px;
   }
 
   .footer-icon p {
-    font-size: .85em;
+    font-size: .85rem;
+  }
+
+  .page-selected {
+    color: var(--navy);
   }
 
   /* homepage */
@@ -72,8 +91,10 @@
     margin-top: 40px;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    height: 100%;
     width: 100%;
+    margin-bottom: 2rem;
+    position: relative;
   }
 /* homepage img ul */
   #homepage-images {
@@ -99,13 +120,14 @@
   #about-us {
     margin-top: 40px;
     width: 100%;
+    margin-bottom: 2rem;
   }
 
   #about-us-title {
     color: var(--navy);
-    padding-left: 4em;
+    padding-left: 4rem;
     padding-bottom: 7px;
-    width: 9.2em;
+    width: 9.2rem;
     border-bottom: var(--navy) 2px solid;
     margin-bottom: 20px;
   }
@@ -118,5 +140,18 @@
 
   #about-us-text {
     width: 85%;
-    line-height: 1.4em;
+    line-height: 1.4rem;
+  }
+
+  /* copyright - change position to abs, if not enough content*/
+
+  #copyright {
+    margin-top: 1rem;
+    position: relative;
+    bottom: 0;
+    font-size: .6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
   }
