@@ -18,14 +18,48 @@
     <link rel="stylesheet" href="./assets/reset.css" />
     <link rel="stylesheet" href="./assets/style.css" />
     <title>HIFF App (TBD)</title>
-    <script defer src="./index.js" type="module"></script>
+    <!-- <script defer src="./index.js" type="module"></script> -->
   </head>
   <body id="body">
     <header>
+      <!-- Change inner HTML in page js's: -->
       <h1 id="org-name">Org Name</h1>
     </header>
     <main id="main">
-     
+      <form id="project-organization">
+        <ul id="project-organization-ul">
+          <li id="project-filter-li">
+            <select name="project-filter-select" >
+              <option selected value="all-projects">All Projects</option>
+              <optgroup label="Cause">
+                <option value="community">Community</option>
+                <option value="education">Education</option>
+                <option value="hunger">Hunger</option>
+                <option value="social justice">Social Justice</option>
+              </optgroup>
+              <optgroup label="Location">
+                <option value="center-city">Center City</option>
+                <option value="north-philly">North Philly</option>
+                <option value="northeast-philly">Northeast Philly</option>
+                <option value="south-philly">South Philly</option>
+                <option value="west-philly">West Philly</option>
+              </optgroup>
+              <optgroup label="School">
+                <option value="test">Test</option>
+              </optgroup>
+            </select>
+          </li>
+          <li id="project-sort-li">
+            <select name="project-sort-select" >
+              <option selected value="newest">Newest</option>
+              <option value="budget">Budget</option>
+            </select>
+          </li>
+        </ul>
+      </form>
+      <ul id="project-card-contain">
+        <li class="project-card"></li>
+      </ul>
     </main>
     <footer>
       <ul id="footer-list">

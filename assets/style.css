@@ -14,7 +14,7 @@
     font-size: 20px;
     display: grid;
     grid-template-columns: [start] 100% [end];
-    grid-template-rows: [header-start] 17% [header-end main-start] auto [main-end footer-start] 3.5rem [footer-end];
+    grid-template-rows: [header-start] 10% [header-end main-start] auto [main-end footer-start] 3.5rem [footer-end];
     flex-direction: column;
     align-items: center;
     height: 100%;
@@ -157,3 +157,51 @@
     justify-content: flex-start;
     align-items: flex-start;
   }
+
+  /* projects page */
+
+  #project-organization {
+    display: flex;
+    width: 90%;
+  }
+
+  #project-organization-ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  #project-filter-li, #project-sort-li {
+    position: relative;
+    border: var(--navy) solid 2px;
+  }
+
+
+  select {
+    height: 1.6rem;
+    padding: 2px 2rem 2px 7px;
+    /* removes native button: */
+    appearance: none;
+  }
+
+    /* select bar buttons */
+
+    #project-filter-li::after, #project-sort-li::after {
+      content: '>';
+      transform: rotate(90deg);
+      background-color: var(--orange);
+      width: 32px;
+      height: 32px;
+      position: absolute;
+      font-size: 1.5rem;
+      text-align: center;
+      right: 1px;
+      bottom: -1px;
+      pointer-events: none;
+      font-weight: 600;
+      border-bottom: var(--navy) solid 2px;
+
+    }
+
