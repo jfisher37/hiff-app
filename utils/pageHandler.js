@@ -31,7 +31,7 @@ const pageHandler = async () => {
 
       //load page related to icon
       if (icon.dataset.page === "homepage") {
-        homepage();
+        homePage();
       } else if (icon.dataset.page === "projects") {
         console.log("projects coming");
       } else if (icon.dataset.page === "partners") {
