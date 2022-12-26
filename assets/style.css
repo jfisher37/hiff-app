@@ -226,12 +226,12 @@
 
     /* Align the cards into appropriate sides of grid */
 
-    .left-project-card {
+    #left-project-cards {
       grid-column: start / middle;
       grid-row: start / end;
     }
 
-    .right-project-card {
+    #right-project-cards {
       grid-column: middle / end;
       grid-row: start / end;
     }
@@ -241,8 +241,9 @@
     .project-card {
       background-color: var(--green);
       width: 95%;
-      height: 100px;
+      height: 200px;
       border-radius: 20px;
       position: relative;
+      margin-bottom: 15px;
     }
 
