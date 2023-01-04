@@ -4,6 +4,7 @@
     --purple: #642e75;
     --yellow: #fccc16;
     --navy: #0c3655;
+    --cream: #faf3ea;
     font-size: 20px;
   }
 
@@ -195,55 +196,156 @@
 
     /* select bar buttons */
 
-    #project-filter-li::after, #project-sort-li::after {
-      content: '>';
-      transform: rotate(90deg);
-      background-color: var(--orange);
-      width: 32px;
-      height: 32px;
-      position: absolute;
-      font-size: 1.5rem;
-      text-align: center;
-      right: 1px;
-      bottom: -1px;
-      pointer-events: none;
-      font-weight: 600;
-      border-bottom: var(--navy) solid 2px;
+  #project-filter-li::after, #project-sort-li::after {
+    content: '>';
+    transform: rotate(90deg);
+    background-color: var(--orange);
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    font-size: 1.5rem;
+    text-align: center;
+    right: 1px;
+    bottom: -1px;
+    pointer-events: none;
+    font-weight: 600;
+    border-bottom: var(--navy) solid 2px;
 
-    }
+  }
 
-    /* Grid for project cards */
+  /* Grid for project cards */
 
-    #project-card-contain {
-      margin-top: 30px;
-      display: grid;
-      grid-template-columns: [start] 50% [middle] 50% [end];
-      grid-template-rows: [start] 100% [end];
-      position: relative;
-      width: 90%;
-      height: fit-content;
-    }
+  #project-card-contain {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: [start] 50% [middle] 50% [end];
+    grid-template-rows: [start] 100% [end];
+    position: relative;
+    width: 90%;
+    height: fit-content;
+  }
 
-    /* Align the cards into appropriate sides of grid */
+  /* Align the cards into appropriate sides of grid */
 
-    #left-project-cards {
-      grid-column: start / middle;
-      grid-row: start / end;
-    }
+  #left-project-cards {
+    grid-column: start / middle;
+    grid-row: start / end;
+  }
 
-    #right-project-cards {
-      grid-column: middle / end;
-      grid-row: start / end;
-    }
+  #right-project-cards {
+    grid-column: middle / end;
+    grid-row: start / end;
+  }
 
-    /* project card styling */
+  /* project card styling */
 
-    .project-card {
-      background-color: var(--green);
-      width: 95%;
-      height: 200px;
-      border-radius: 20px;
-      position: relative;
-      margin-bottom: 15px;
-    }
+  .project-card {
+    background-color: var(--cream);
+    width: 95%;
+    border-radius: 20px;
+    position: relative;
+    margin-bottom: 15px;
+    border: solid var(--navy) 2px;
+  }
+
+  .project-card-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--navy);
+  }
+
+  .project-card-title {
+    margin-top: .6rem;
+    margin-bottom: .6rem;
+    font-size: 1.15rem;
+  }
+
+  .project-card-person {
+    margin-bottom: .6rem;
+  }
+
+  .project-card-person-ul {
+    display: grid;
+    grid-template-columns: [start] 40% [middle] 60% [end];
+    grid-template-rows: [start] 100% [end];
+  }
+
+  .person-pic-contain {
+    grid-column: start / middle;
+    grid-row: start / end;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .person-pic {
+    height: 95%;
+    width: 95%;
+    border-radius: 50%;
+  }
+
+  .person-name-contain {
+    grid-column: middle / end;
+    grid-row: start / end;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  .person-name-contain h3 {
+    text-align: center;
+    font-size: .85rem;
+  }
+
+  .project-card-school {
+    margin-bottom: .4rem;
+  }
+
+  .school-name {
+    font-weight: 600;
+  }
+
+  .project-card-budget {
+    margin-bottom: .5rem;
+  }
+
+  .budget {
+    font-weight: 600;
+  }
+  
+  .project-card-tags {
+    margin-bottom: .6rem;
+  }
+
+  .project-tag-list {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+
+  .tag {
+    font-size: .75rem;
+    margin-top: .2rem;
+    margin-bottom: .4rem;
+    border: black solid 1px;
+    border-radius: 50%;
+    padding: .4rem .8rem;
+    text-align: center;
+    color: white;
+  }
+
+  .community-tag {
+    background-color: red;
+  }
+  .west-philly-tag {
+    background-color: rgb(196, 41, 196);
+  }
 
