@@ -343,9 +343,11 @@
   }
 
   .community-tag {
+    /* TODO: Standardize color: */
     background-color: red;
   }
   .west-philly-tag {
+    /* TODO: Standardize color: */
     background-color: rgb(196, 41, 196);
   }
 
