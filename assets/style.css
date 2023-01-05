@@ -4,6 +4,7 @@
     --purple: #642e75;
     --yellow: #fccc16;
     --navy: #0c3655;
+    --cream: #faf3ea;
     font-size: 20px;
   }
 
@@ -14,7 +15,7 @@
     font-size: 20px;
     display: grid;
     grid-template-columns: [start] 100% [end];
-    grid-template-rows: [header-start] 17% [header-end main-start] auto [main-end footer-start] 3.5rem [footer-end];
+    grid-template-rows: [header-start] 10% [header-end main-start] auto [main-end footer-start] 3.5rem [footer-end];
     flex-direction: column;
     align-items: center;
     height: 100%;
@@ -157,3 +158,203 @@
     justify-content: flex-start;
     align-items: flex-start;
   }
+
+  /* projects page */
+
+  #projects-title {
+    color: var(--navy);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    margin-top: .5rem;
+  }
+
+  #project-organization {
+    display: flex;
+    width: 90%;
+  }
+
+  #project-organization-ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  #project-filter-li, #project-sort-li {
+    position: relative;
+    border: var(--navy) solid 2px;
+  }
+
+
+  select {
+    height: 1.6rem;
+    padding: 2px 2rem 2px 7px;
+    /* removes native button: */
+    appearance: none;
+  }
+
+    /* select bar buttons */
+
+  #project-filter-li::after, #project-sort-li::after {
+    content: '>';
+    transform: rotate(90deg);
+    background-color: var(--orange);
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    font-size: 1.5rem;
+    text-align: center;
+    right: 1px;
+    bottom: -1px;
+    pointer-events: none;
+    font-weight: 600;
+    border-bottom: var(--navy) solid 2px;
+
+  }
+
+  /* Grid for project cards */
+
+  #project-card-contain {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: [start] 50% [middle] 50% [end];
+    grid-template-rows: [start] 100% [end];
+    position: relative;
+    width: 90%;
+    height: fit-content;
+  }
+
+  /* Align the cards into appropriate sides of grid */
+
+  #left-project-cards {
+    grid-column: start / middle;
+    grid-row: start / end;
+  }
+
+  #right-project-cards {
+    grid-column: middle / end;
+    grid-row: start / end;
+  }
+
+  /* project card styling */
+
+  .project-card {
+    background-color: var(--cream);
+    width: 95%;
+    border-radius: 20px;
+    position: relative;
+    margin-bottom: 15px;
+    border: solid var(--navy) 2px;
+  }
+
+  .project-card-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: black;
+  }
+
+  .project-card-title {
+    margin-top: .6rem;
+    margin-bottom: .6rem;
+    font-size: 1.15rem;
+  }
+
+  .project-card-title h3 {
+    text-align: center;
+  }
+
+  .project-card-person {
+    margin-bottom: .6rem;
+  }
+
+  .project-card-person-ul {
+    display: grid;
+    grid-template-columns: [start] 40% [middle] 60% [end];
+    grid-template-rows: [start] 100% [end];
+  }
+
+  .person-pic-contain {
+    grid-column: start / middle;
+    grid-row: start / end;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .person-pic {
+    height: 95%;
+    width: 95%;
+    border-radius: 50%;
+    border: solid black 1px;
+  }
+
+  .person-name-contain {
+    grid-column: middle / end;
+    grid-row: start / end;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  .person-name-contain h3 {
+    text-align: center;
+    font-size: .85rem;
+  }
+
+  .project-card-school {
+    margin-bottom: .4rem;
+    width: 96%;
+  }
+
+  .school-name {
+    font-weight: 600;
+  }
+
+  .project-card-budget {
+    margin-bottom: .5rem;
+    width: 96%;
+  }
+
+  .budget {
+    font-weight: 600;
+  }
+  
+  .project-card-tags {
+    margin-bottom: .6rem;
+  }
+
+  .project-tag-list {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+
+  .tag {
+    font-size: .75rem;
+    margin-top: .2rem;
+    margin-bottom: .4rem;
+    border: black solid 1px;
+    border-radius: 50%;
+    padding: .4rem .8rem;
+    text-align: center;
+    color: white;
+  }
+
+  .community-tag {
+    /* TODO: Standardize color: */
+    background-color: red;
+  }
+  .west-philly-tag {
+    /* TODO: Standardize color: */
+    background-color: rgb(196, 41, 196);
+  }
+

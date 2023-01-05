@@ -1,4 +1,4 @@
-import homepage from "../pages/homepage.js";
+// import homepage from "../pages/homepage.js";
 
 const pageHandler = async () => {
   //create relevant dom els
@@ -6,13 +6,13 @@ const pageHandler = async () => {
   const pageIconEls = Array.from(pageListEl.getElementsByTagName("li"));
 
   //async imports of relevant modules:
-  const homePage = await import("../pages/homepage.js").then(async (module) => {
+  const homepage = await import("../pages/homepage.js").then(async (module) => {
     return await module.default;
   });
 
-//   const projectsPage = await import("../pages/settingsPage.js").then(async (module) => {
-//     return await module.default;
-//   });
+  const projectPage = await import("../pages/projectPage.js").then(async (module) => {
+    return await module.default;
+  });
 
 //   const partnersPage = await import("../pages/friendsPage.js").then(async (module) => {
 //     return await module.default;
@@ -33,7 +33,7 @@ const pageHandler = async () => {
       if (icon.dataset.page === "homepage") {
         homepage();
       } else if (icon.dataset.page === "projects") {
-        console.log("projects coming");
+        projectPage()
       } else if (icon.dataset.page === "partners") {
         console.log("partners coming");
       } 
