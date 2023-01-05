@@ -45,7 +45,7 @@ const projectPage = async () => {
         lastName: "Cooke",
         school: "A Very Long-named High School",
         budget: 27300,
-        tags: ["hunger", "hunger", "west-philly", "north-philly"],
+        tags: ["hunger", "community", "west-philly", "north-philly"],
         createdAt: new Date("2023-01-04"),
       },
     ];
