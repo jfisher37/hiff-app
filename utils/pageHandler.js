@@ -10,9 +10,9 @@ const pageHandler = async () => {
     return await module.default;
   });
 
-//   const projectsPage = await import("../pages/settingsPage.js").then(async (module) => {
-//     return await module.default;
-//   });
+  const projectPage = await import("../pages/projectPage.js").then(async (module) => {
+    return await module.default;
+  });
 
 //   const partnersPage = await import("../pages/friendsPage.js").then(async (module) => {
 //     return await module.default;
@@ -33,7 +33,7 @@ const pageHandler = async () => {
       if (icon.dataset.page === "homepage") {
         homepage();
       } else if (icon.dataset.page === "projects") {
-        console.log("projects coming");
+        projectPage()
       } else if (icon.dataset.page === "partners") {
         console.log("partners coming");
       } 

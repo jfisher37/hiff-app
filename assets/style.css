@@ -255,13 +255,17 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: var(--navy);
+    color: black;
   }
 
   .project-card-title {
     margin-top: .6rem;
     margin-bottom: .6rem;
     font-size: 1.15rem;
+  }
+
+  .project-card-title h3 {
+    text-align: center;
   }
 
   .project-card-person {
@@ -286,6 +290,7 @@
     height: 95%;
     width: 95%;
     border-radius: 50%;
+    border: solid black 1px;
   }
 
   .person-name-contain {
@@ -306,6 +311,7 @@
 
   .project-card-school {
     margin-bottom: .4rem;
+    width: 96%;
   }
 
   .school-name {
@@ -314,6 +320,7 @@
 
   .project-card-budget {
     margin-bottom: .5rem;
+    width: 96%;
   }
 
   .budget {
