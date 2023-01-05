@@ -353,8 +353,36 @@
     /* TODO: Standardize color: */
     background-color: red;
   }
+  .education-tag {
+    /* TODO: Standardize color: */
+    background-color: rgb(62, 245, 123);
+  }
+  .hunger-tag {
+    /* TODO: Standardize color: */
+    background-color: rgb(62, 117, 245);
+  }
+  .social-justice-tag {
+    /* TODO: Standardize color: */
+    background-color: rgb(249, 199, 74);
+  }
+  .center-city-tag {
+    /* TODO: Standardize color: */
+    background-color: rgb(142, 137, 142);
+  }
+  .north-philly-tag {
+    /* TODO: Standardize color: */
+    background-color: rgb(248, 103, 86);
+  }
+  .northeast-philly-tag {
+    /* TODO: Standardize color: */
+    background-color: rgb(110, 214, 240);
+  }
   .west-philly-tag {
     /* TODO: Standardize color: */
     background-color: rgb(196, 41, 196);
+  }
+  .south-philly-tag {
+    /* TODO: Standardize color: */
+    background-color: rgb(53, 57, 26);
   }
 
