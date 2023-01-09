@@ -1,3 +1,27 @@
+//Set default filter and sort
+let filter = "allProjects";
+let sort = "newest";
+
+//What filters and sort are selected
+
+const filterSelection = {
+  all: "selected",
+  community: "",
+  education: "",
+  hunger: "",
+  socialJustice: "",
+  centerCity: "",
+  northPhilly: "",
+  northeastPhilly: "",
+  southPhilly: "",
+  westPhilly: "",
+};
+
+const sortSelection = {
+  newest: "selected",
+  budget: "",
+};
+
 const projectPage = async () => {
   const mainEl = document.getElementById("main");
 
@@ -163,19 +187,19 @@ const projectPage = async () => {
       <ul id="project-organization-ul">
         <li id="project-filter-li">
           <select name="project-filter-select">
-            <option selected value="all-projects">All Projects</option>
+            <option ${filterSelection.allProjects} value="allProjects">All Projects</option>
             <optgroup label="Cause">
-              <option value="community">Community</option>
-              <option value="education">Education</option>
-              <option value="hunger">Hunger</option>
-              <option value="social-justice">Social Justice</option>
+              <option ${filterSelection.community} value="community">Community</option>
+              <option ${filterSelection.education} value="education">Education</option>
+              <option ${filterSelection.hunger} value="hunger">Hunger</option>
+              <option ${filterSelection.socialJustice} value="socialJustice">Social Justice</option>
             </optgroup>
             <optgroup label="Location">
-              <option value="center-city">Center City</option>
-              <option value="north-philly">North Philly</option>
-              <option value="northeast-philly">Northeast Philly</option>
-              <option value="south-philly">South Philly</option>
-              <option value="west-philly">West Philly</option>
+              <option ${filterSelection.centerCity} value="centerCity">Center City</option>
+              <option ${filterSelection.northPhilly} value="northPhilly">North Philly</option>
+              <option ${filterSelection.northeastPhilly} value="northeastPhilly">Northeast Philly</option>
+              <option ${filterSelection.southPhilly} value="southPhilly">South Philly</option>
+              <option ${filterSelection.westPhilly} value="westPhilly">West Philly</option>
             </optgroup>
             <optgroup label="School">
               <option value="test">Test</option>
@@ -184,8 +208,8 @@ const projectPage = async () => {
         </li>
         <li id="project-sort-li">
           <select name="project-sort-select">
-            <option selected value="newest">Newest</option>
-            <option value="budget">Budget</option>
+            <option ${sortSelection.newest} value="newest">Newest</option>
+            <option ${sortSelection.budget} value="budget">Budget</option>
           </select>
         </li>
       </ul>
@@ -215,7 +239,7 @@ const projectPage = async () => {
     };
 
     //If it's all projects don't filter, just sort
-    if (filter === "all-projects") {
+    if (filter === "allProjects") {
       return sortCards(cardsArr);
     } else {
       const filteredCardsArr = cardsArr.filter((card) => {
@@ -235,32 +259,32 @@ const projectPage = async () => {
               return true;
             }
             break;
-          case "social-justice":
+          case "socialJustice":
             if (card.tags.includes("social-justice")) {
               return true;
             }
             break;
-          case "center-city":
+          case "centerCity":
             if (card.tags.includes("center-city")) {
               return true;
             }
             break;
-          case "north-philly":
+          case "northPhilly":
             if (card.tags.includes("north-philly")) {
               return true;
             }
             break;
-          case "northeast-philly":
+          case "northeastPhilly":
             if (card.tags.includes("northeast-philly")) {
               return true;
             }
             break;
-          case "south-philly":
+          case "southPhilly":
             if (card.tags.includes("south-philly")) {
               return true;
             }
             break;
-          case "west-philly":
+          case "westPhilly":
             if (card.tags.includes("west-philly")) {
               return true;
             }
@@ -277,19 +301,10 @@ const projectPage = async () => {
 
   const cards = await getCards();
 
-  //Set default filter and sort
-  let filter = "all-projects";
-
-  let sort = "newest";
-
   const sortedCards = cardSorter(cards, filter, sort);
 
   const insertCards = (cards) => {
-    console.log("CARDS", cards);
-
     cardGeneration(cards);
-
-    console.log("CHILDREN", cardContainEl.children);
 
     const cardEls = `
 <li id="left-project-cards">
@@ -332,12 +347,30 @@ const projectPage = async () => {
     filter = filterSelectEl.value;
 
     replaceCards();
+
+    for (const selection in filterSelection) {
+      if (selection === filter) {
+        filterSelection[selection] = "selected";
+        console.log("SELECTED", selection);
+      } else {
+        filterSelection[selection] = "";
+        console.log("UNSELECTED", selection);
+      }
+    }
   });
 
   sortSelectEl.addEventListener("change", () => {
     sort = sortSelectEl.value;
 
     replaceCards();
+
+    for (const selection in sortSelection) {
+        if (selection === sort) {
+          sortSelection[selection] = "selected";
+        } else {
+          sortSelection[selection] = "";
+        }
+      }
   });
 };
 
