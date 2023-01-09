@@ -1,5 +1,3 @@
-// import homepage from "../pages/homepage.js";
-
 const pageHandler = async () => {
   //create relevant dom els
   const pageListEl = document.getElementById("footer-list");
@@ -14,9 +12,9 @@ const pageHandler = async () => {
     return await module.default;
   });
 
-//   const partnersPage = await import("../pages/friendsPage.js").then(async (module) => {
-//     return await module.default;
-//   });
+  const partnerPage = await import("../pages/partnerPage.js").then(async (module) => {
+    return await module.default;
+  });
 
   //creates onClicks for footer icons
   pageIconEls.forEach((icon) => {
@@ -33,9 +31,9 @@ const pageHandler = async () => {
       if (icon.dataset.page === "homepage") {
         homepage();
       } else if (icon.dataset.page === "projects") {
-        projectPage()
+        projectPage();
       } else if (icon.dataset.page === "partners") {
-        console.log("partners coming");
+        partnerPage();
       } 
     });
   });
