@@ -23,6 +23,8 @@ const sortSelection = {
   budget: "",
 };
 
+// TODO: SET IMAGES TO LAZY LOAD
+
 const projectPage = async () => {
   const mainEl = document.getElementById("main");
 
@@ -388,14 +390,14 @@ const projectPage = async () => {
     }
   });
 
-//   Set scrollY
+//   Get and Set scrollY
 
   document.addEventListener("scroll", () => {
 
+   //Only if we're on the project page
     if (document.getElementById("projects-title")){
         windowYOffset = window.scrollY;
     }
-
   })
 
   window.scroll(0, windowYOffset);
