@@ -239,7 +239,7 @@ const projectPage = async () => {
 
     projectCardEls.forEach((card) => {
       card.addEventListener("click", () => {
-         windowYOffset = window.scrollY;
+        //  windowYOffset = window.scrollY;
       });
     });
   };
@@ -389,6 +389,15 @@ const projectPage = async () => {
   });
 
 //   Set scrollY
+
+  document.addEventListener("scroll", () => {
+
+    if (document.getElementById("projects-title")){
+        windowYOffset = window.scrollY;
+    }
+
+  })
+
   window.scroll(0, windowYOffset);
 };
 
