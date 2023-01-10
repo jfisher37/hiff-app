@@ -1,6 +1,7 @@
 //Set default filter and sort
 let filter = "allProjects";
 let sort = "newest";
+let windowYOffset = 0;
 
 //What filters and sort are selected
 
@@ -229,6 +230,20 @@ const projectPage = async () => {
   const filterSelectEl = document.getElementsByName("project-filter-select")[0];
   const sortSelectEl = document.getElementsByName("project-sort-select")[0];
 
+  //Onclick event response for cards:
+
+  const addCardClickResponse = () => {
+    const projectCardEls = Array.from(
+      document.getElementsByClassName("project-card")
+    );
+
+    projectCardEls.forEach((card) => {
+      card.addEventListener("click", () => {
+         windowYOffset = window.scrollY;
+      });
+    });
+  };
+
   const cardSorter = (cardsArr, filter, sort) => {
     const sortCards = (filteredCards) => {
       if (sort === "newest") {
@@ -321,6 +336,8 @@ const projectPage = async () => {
 
     cardContainEl.innerHTML = cardEls;
 
+    addCardClickResponse();
+
     return;
   };
 
@@ -351,10 +368,8 @@ const projectPage = async () => {
     for (const selection in filterSelection) {
       if (selection === filter) {
         filterSelection[selection] = "selected";
-        console.log("SELECTED", selection);
       } else {
         filterSelection[selection] = "";
-        console.log("UNSELECTED", selection);
       }
     }
   });
@@ -365,13 +380,16 @@ const projectPage = async () => {
     replaceCards();
 
     for (const selection in sortSelection) {
-        if (selection === sort) {
-          sortSelection[selection] = "selected";
-        } else {
-          sortSelection[selection] = "";
-        }
+      if (selection === sort) {
+        sortSelection[selection] = "selected";
+      } else {
+        sortSelection[selection] = "";
       }
+    }
   });
+
+//   Set scrollY
+  window.scroll(0, windowYOffset);
 };
 
 export default projectPage;

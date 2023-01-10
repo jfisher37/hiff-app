@@ -47,6 +47,9 @@ const homepage = async () => {
     `
 
     mainEl.innerHTML = homepageContent;
+
+    //reset scroll:
+    window.scroll(0, 0);
   };
   
   export default homepage;
