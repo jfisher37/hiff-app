@@ -263,6 +263,7 @@
     margin-top: .6rem;
     margin-bottom: .6rem;
     font-size: 1.15rem;
+    line-height: 1.4rem;
   }
 
   .project-card-title h3 {
@@ -274,14 +275,18 @@
   }
 
   .project-card-person-ul {
-    display: grid;
+    /* display: grid;
     grid-template-columns: [start] 40% [middle] 60% [end];
-    grid-template-rows: [start] 100% [end];
+    grid-template-rows: [start] 100% [end]; */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
   }
 
   .person-pic-contain {
-    grid-column: start / middle;
-    grid-row: start / end;
+    /* grid-column: start / middle;
+    grid-row: start / end; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -290,13 +295,14 @@
   .person-pic {
     height: 95%;
     width: 95%;
-    border-radius: 50%;
-    border: solid black 1px;
+    /* border-radius: 50%; */
+    /* border: solid black 1px; */
   }
 
   .person-name-contain {
-    grid-column: middle / end;
-    grid-row: start / end;
+    /* grid-column: middle / end;
+    grid-row: start / end; */
+    margin-top: .5rem;
     height: 100%;
     width: 100%;
     display: flex;
