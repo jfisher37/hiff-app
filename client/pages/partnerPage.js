@@ -67,7 +67,7 @@ const partnerPage = async () => {
      </li>
     </ul>
      <aside id="copyright">
-       <p>Copyright © 2023 Organization Name</p>
+       <p>Copyright © 2023 The Philly Service Award</p>
      </aside>
     `
 

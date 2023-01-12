@@ -1,10 +1,8 @@
 :root {
-    --orange: #f4941d;
-    --green: #64bc54;
-    --purple: #642e75;
-    --yellow: #fccc16;
-    --navy: #0c3655;
+    --main: #F0484A;
+    --secondary: #0FBDCB;
     --cream: #faf3ea;
+    --logo-font: cooper-black-std, serif;
     font-size: 20px;
   }
 
@@ -15,7 +13,7 @@
     font-size: 20px;
     display: grid;
     grid-template-columns: [start] 100% [end];
-    grid-template-rows: [header-start] 10% [header-end main-start] auto [main-end footer-start] 3.5rem [footer-end];
+    grid-template-rows: [header-start] 6rem [header-end main-start] auto [main-end footer-start] 3.5rem [footer-end];
     flex-direction: column;
     align-items: center;
     height: 100%;
@@ -37,10 +35,9 @@
   }
 
   #org-name {
-    font-size: 2rem;
-    margin-top: 10px;
-    font-weight: 800;
-    color: var(--orange);
+    width: 70%;
+    max-width: 22rem;
+    margin-top: 20px;
   }
 
     /* Footer */
@@ -52,7 +49,7 @@
     justify-content: center;
     align-items: center;
     height: 3.5rem;
-    background-color: var(--orange);
+    background-color: var(--main);
     grid-column: start / end;
     grid-row: footer-start / footer-end;
   }
@@ -82,7 +79,7 @@
   }
 
   .page-selected {
-    color: var(--navy);
+    color: var(--secondary);
   }
 
   /* main */
@@ -127,21 +124,24 @@
   }
 
   #about-us-title {
-    color: var(--navy);
+    font-family: var(--logo-font);
+    color: var(--secondary);
     padding-left: 4rem;
     padding-bottom: 7px;
     width: 9.2rem;
-    border-bottom: var(--navy) 2px solid;
+    border-bottom: var(--secondary) 2px solid;
     margin-bottom: 20px;
   }
 
   #about-us-text-contain {
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
   }
 
-  #about-us-text {
+  .about-us-text {
     width: 85%;
     line-height: 1.4rem;
   }
@@ -163,7 +163,8 @@
 
   /* Have partner page title match project page */
   #projects-title, #partners-title {
-    color: var(--navy);
+    font-family: var(--logo-font);
+    color: var(--secondary);
     font-size: 1.5rem;
     margin-bottom: 1rem;
     margin-top: .5rem;
@@ -184,7 +185,7 @@
 
   #project-filter-li, #project-sort-li {
     position: relative;
-    border: var(--navy) solid 2px;
+    border: var(--secondary) solid 2px;
   }
 
 
@@ -198,9 +199,10 @@
     /* select bar buttons */
 
   #project-filter-li::after, #project-sort-li::after {
+    color: white;
     content: '>';
     transform: rotate(90deg);
-    background-color: var(--orange);
+    background-color: var(--main);
     width: 32px;
     height: 32px;
     position: absolute;
@@ -210,7 +212,7 @@
     bottom: -1px;
     pointer-events: none;
     font-weight: 600;
-    border-bottom: var(--navy) solid 2px;
+    border-bottom: var(--secondary) solid 2px;
 
   }
 
@@ -246,7 +248,7 @@
     border-radius: 20px;
     position: relative;
     margin-bottom: 15px;
-    border: solid var(--navy) 2px;
+    border: solid var(--secondary) 2px;
   }
 
   .project-card-content {
@@ -405,7 +407,7 @@
   }
 
   #first-partner-tier, #second-partner-tier {
-    border-bottom: var(--navy) solid 3px;
+    border-bottom: var(--secondary) solid 3px;
     padding-bottom: 20px;
   }
 
