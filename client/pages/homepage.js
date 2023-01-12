@@ -29,20 +29,17 @@ const homepage = async () => {
   <article id="about-us">
     <h2 id="about-us-title">About Us</h2>
     <div id="about-us-text-contain">
-      <p id="about-us-text">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-        eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-        eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-        eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-        eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-        eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-        eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-        eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      <p class="about-us-text">
+      We are on a mission to make community service projects accessible to their visionaries. Philadelphia is brimming with young leaders with ideas for tangible change. We’re here to elevate those concepts into action. 
+      </p>
+      <br>
+      <p class="about-us-text">
+      We are partnering with area businesses to award funds to students with an appetite and plan for change. If selected, recipients will receive mentorship, project oversight, and recognition for their contributions.
       </p>
     </div>
   </article>
   <aside id="copyright">
-    <p>Copyright © 2023 Organization Name</p>
+    <p>Copyright © 2023 The Philly Service Award</p>
   </aside>
     `
 
