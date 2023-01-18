@@ -11,12 +11,201 @@
     color: black;
     font-family: 'Open Sans', sans-serif;
     font-size: 20px;
+    height: 100%;
+    width: 100%;
+
+  }
+
+  /* splash screen*/
+
+.not-logged-body {
+      
+      /* This may become an issue? idk, but, for now, seems to fix issue of 
+  page not reaching absolute bottom of screen */
+  position: fixed;
+
+}
+
+#splash,
+#sign-up-page,
+#login-page {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  background-color: var(--main);
+  grid-template-columns: [first] 100% [second];
+  grid-template-rows: [first] 33% [second] 33% [third] 33% [fourth];
+}
+
+#splash-title,
+#sign-up-title,
+#sign-up-form,
+#login-title,
+#login-form {
+  grid-column-start: first;
+  grid-column-end: second;
+}
+
+
+#splash-title {
+  font-size: 3em;
+  font-family: var(--logo-font);
+  color: var(--cream);
+  text-align: center;
+  grid-row-start: second;
+  grid-row-end: third;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  text-shadow: 0 1px 1px black;
+}
+
+#splash-login-signup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  grid-row-start: third;
+  grid-row-end: fourth;
+  /* margin-bottom: 75px; */
+}
+
+#splash-create-account {
+  margin-bottom: 30px;
+}
+
+/* buttons on splash screen */
+
+.splash-btn {
+  background-color: transparent;
+  width: 275px;
+  height: 60px;
+  background-color: var(--secondary);
+  color: var(--cream);
+  font-size: 1.2em;
+  font-weight: 900;
+  border-color: var(--cream);
+  border-radius: 30px;
+  box-shadow: 0 0 1px 1px var(--cream);
+  text-shadow: 0 2px 2px black;
+}
+
+/* sign up  and login*/
+
+/* sign-up-title */
+#sign-up-title,
+#login-title {
+  font-size: 4em;
+  color: var(--cream);
+  font-family: var(--logo-font);
+  text-align: center;
+  grid-row-start: first;
+  grid-row-end: second;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-shadow: 0 1px 1px black;
+}
+
+#sign-up-form,
+#login-form {
+  font-size: 1.2em;
+  color: var(--cream);
+}
+
+#sign-up-inputs,
+#login-inputs {
+  display: flex;
+  flex-direction: column;
+  grid-row-start: second;
+  grid-row-end: third;
+  height: 100%;
+  width: 100%;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-left: 20px;
+}
+
+#login-inputs {
+  justify-content: space-evenly;
+}
+
+#sign-up-inputs li,
+#login-inputs li {
+  display: flex;
+  flex-direction: column;
+  text-shadow: 0 1px 1px black;
+}
+
+.sign-up-input,
+.login-input {
+  margin-top: 5px;
+}
+
+#password-rules {
+  margin-top: 5px;
+  font-size: 0.5em;
+  margin-left: 2px;
+}
+
+/* error message */
+
+.error-message {
+  font-size: 0.75em;
+  width: 100%;
+  padding-left: 20px;
+  text-shadow: 0 1px 1px black;
+  margin-top: 50px;
+  line-height: 0px;
+}
+
+/* sign up btn */
+
+#sign-up-btn-contain,
+#login-btn-contain {
+  grid-row-start: third;
+  grid-row-end: fourth;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+#sign-up-btn,
+#login-btn {
+  margin-right: 25px;
+  background-color: var(--secondary);
+  color: var(--cream);
+  text-shadow: 0 1px 1px black;
+  box-shadow: 0 0px 2px black;
+  height: 60px;
+  width: 150px;
+  border-color: var(--cream);
+  border-width: 3px;
+  border-radius: 10px;
+}
+
+#already-have-account-btn,
+#dont-have-account-btn {
+  margin-top: 40px;
+  width: 100%;
+  background: none;
+  border: none;
+  font-size: 0.8em;
+  color: var(--cream);
+  text-shadow: 0 0px 1.5px black;
+  text-decoration: underline;
+}
+  
+/* Add grid if logged in */
+  .logged-in-body {
     display: grid;
     grid-template-columns: [start] 100% [end];
     grid-template-rows: [header-start] 6rem [header-end main-start] auto [main-end footer-start] 3.5rem [footer-end];
     flex-direction: column;
     align-items: center;
-    height: 100%;
   }
 
   /* main grid */
@@ -157,6 +346,19 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+  }
+
+  /* copyright if not logged in */
+
+  .not-logged-copyright {
+    color: var(--cream);
+    align-items: center !important;
+    width: 100%;
+    text-shadow: 0 0px 1.5px black;
+  }
+
+  .copyright-splash {
+    padding-top: 60px;
   }
 
   /* projects page */
