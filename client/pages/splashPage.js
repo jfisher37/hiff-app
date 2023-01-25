@@ -8,7 +8,7 @@ const splashPage = async () => {
   bodyEl.innerHTML = `
 <div id="splash">
 <div id="splash-title">
-<h1>The Philly Service Award</h1>
+<img id="splash-org-name" src="./assets/images/logo.png"></img>
 </div>
 <ul id="splash-login-signup">
   <li id="splash-create-account"><button class="splash-btn">
