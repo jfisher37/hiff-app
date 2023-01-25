@@ -113,7 +113,7 @@
 #sign-up-title,
 #login-title {
   font-size: 4em;
-  color: var(--main);
+  color: var(--secondary);
   font-family: var(--logo-font);
   text-align: center;
   grid-row-start: first;
@@ -127,7 +127,7 @@
 #sign-up-form,
 #login-form {
   font-size: 1.2em;
-  color: var(--secondary);
+  color: var(--main);
 }
 
 #sign-up-inputs,
@@ -211,7 +211,7 @@
   background: none;
   border: none;
   font-size: 0.8em;
-  color: var(--secondary);
+  color: var(--main);
   text-shadow: 0 .25px .25px black;
   text-decoration: underline;
 }
