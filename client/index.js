@@ -4,7 +4,7 @@ import splashPage from "./pages/splashPage.js";
 
 
 // TODO: replace this with an auth function:
-const loggedIn = false;
+const loggedIn = true;
 
 // If logged in, load logged in frame and homepage. If not, open splash page.
 

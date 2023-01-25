@@ -1,3 +1,5 @@
+import tagGenerator from "../utils/tagGenerator.js"
+
 //Set default filter and sort
 let filter = "allProjects";
 let sort = "newest";
@@ -41,6 +43,10 @@ const projectPage = async () => {
         school: "Central High School",
         budget: 5005,
         tags: ["community", "west-philly"],
+        profilePic: "./assets/images/placeholder_300x300.jpeg",
+        solving: "There are a lot of people in Philadelphia. Over one and a half million. Some of them need help.",
+        proposal: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.",
+        photos: [],
         createdAt: new Date("2022-06-01"),
       },
       {
@@ -50,6 +56,10 @@ const projectPage = async () => {
         school: "Some Other School",
         budget: 500,
         tags: ["community", "education", "center-city", "south-philly"],
+        profilePic: "./assets/images/placeholder_300x300.jpeg",
+        solving: "There are a lot of people in Philadelphia. Over one and a half million. Some of them need help. I propose to help more of them than Phil Helper, that sanctimonious, ineffective worm.",
+        proposal: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.",
+        photos: ["./assets/images/placeholder_300x300.jpeg", "./assets/images/placeholder_300x300.jpeg"],
         createdAt: new Date("2022-09-01"),
       },
       {
@@ -64,6 +74,10 @@ const projectPage = async () => {
           "west-philly",
           "northeast-philly",
         ],
+        profilePic: "./assets/images/placeholder_300x300.jpeg",
+        solving: "I'm tired of all the garbage lying around in this damn city, aren't you? we've gotta get rid of the garbage. We gotta clean it all.",
+        proposal: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.",
+        photos: ["./assets/images/placeholder_300x300.jpeg"],
         createdAt: new Date("2022-12-01"),
       },
       {
@@ -73,6 +87,10 @@ const projectPage = async () => {
         school: "A Very Long-named High School",
         budget: 27300,
         tags: ["hunger", "community", "west-philly", "north-philly"],
+        profilePic: "./assets/images/placeholder_300x300.jpeg",
+        solving: "People are hungry. It's very bad.",
+        proposal: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.",
+        photos: ["./assets/images/placeholder_300x300.jpeg", "./assets/images/placeholder_300x300.jpeg", "./assets/images/placeholder_300x300.jpeg"],
         createdAt: new Date("2023-01-04"),
       },
     ];
@@ -87,61 +105,7 @@ const projectPage = async () => {
   const cardGeneration = (cardContentArr) => {
     for (let i = 0; i < cardContentArr.length; i++) {
       // Creates the tags for the card
-      const tagsArr = [];
-
-      cardContentArr[i].tags.forEach((tag) => {
-        switch (tag) {
-          case "community":
-            tagsArr.push(`
-                        <li class="tag community-tag">Community</li>
-                        `);
-            break;
-          case "education":
-            tagsArr.push(`
-                        <li class="tag education-tag">Education</li>
-                        `);
-            break;
-          case "hunger":
-            tagsArr.push(`
-                        <li class="tag hunger-tag">Hunger</li>
-                        `);
-            break;
-          case "social-justice":
-            tagsArr.push(`
-                        <li class="tag social-justice-tag">Social Justice</li>
-                        `);
-            break;
-          case "center-city":
-            tagsArr.push(`
-                        <li class="tag center-city-tag">Center City</li>
-                        `);
-            break;
-          case "north-philly":
-            tagsArr.push(`
-                        <li class="tag north-philly-tag">North Philly</li>
-                        `);
-            break;
-          case "northeast-philly":
-            tagsArr.push(`
-                        <li class="tag northeast-philly-tag">Northeast Philly</li>
-                        `);
-            break;
-          case "south-philly":
-            tagsArr.push(`
-                        <li class="tag south-philly-tag">South Philly</li>
-                        `);
-            break;
-
-          case "west-philly":
-            tagsArr.push(`
-                        <li class="tag west-philly-tag">West Philly</li>
-                        `);
-            break;
-
-          default:
-            break;
-        }
-      });
+      const tagsArr = tagGenerator(cardContentArr[i].tags);
 
       const cardTemplate = `
             <li class="project-card">
@@ -152,7 +116,7 @@ const projectPage = async () => {
               <li class="project-card-person">
                 <ul class="project-card-person-ul">
                   <li class="person-pic-contain">
-                    <img class="person-pic" src="./assets/images/placeholder_300x300.jpeg">
+                    <img class="person-pic" src="${cardContentArr[i].profilePic}">
                   </li>
                   <li class="person-name-contain">
                     <h3 class="first-name">${cardContentArr[i].firstName}</h3>
