@@ -1,4 +1,5 @@
 import tagGenerator from "../utils/tagGenerator.js"
+import specificProjectPage from "./specificProjectPage.js"
 
 //Set default filter and sort
 let filter = "allProjects";
@@ -25,9 +26,21 @@ const sortSelection = {
   budget: "",
 };
 
+// var for whether or not specific page is open. Default to false
+
+let specificPageOpen = false;
+
 // TODO: SET IMAGES TO LAZY LOAD
 
-const projectPage = async () => {
+const projectPage = async (closed) => {
+
+  // create conditional statement for whether a specfic project page is still open:
+  if (closed) {
+    specificPageOpen = false;
+  } 
+
+
+
   const mainEl = document.getElementById("main");
 
   const getCards = async () => {
@@ -48,6 +61,7 @@ const projectPage = async () => {
         proposal: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.",
         photos: [],
         createdAt: new Date("2022-06-01"),
+        id: "1",
       },
       {
         title: "Helping MORE People",
@@ -61,6 +75,7 @@ const projectPage = async () => {
         proposal: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.",
         photos: ["./assets/images/placeholder_300x300.jpeg", "./assets/images/placeholder_300x300.jpeg"],
         createdAt: new Date("2022-09-01"),
+        id: "2",
       },
       {
         title: "Cleaning Up All The Garbage in Philadelphia",
@@ -79,6 +94,7 @@ const projectPage = async () => {
         proposal: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.",
         photos: ["./assets/images/placeholder_300x300.jpeg"],
         createdAt: new Date("2022-12-01"),
+        id: "3",
       },
       {
         title: "Feed The Children",
@@ -92,10 +108,26 @@ const projectPage = async () => {
         proposal: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.",
         photos: ["./assets/images/placeholder_300x300.jpeg", "./assets/images/placeholder_300x300.jpeg", "./assets/images/placeholder_300x300.jpeg"],
         createdAt: new Date("2023-01-04"),
+        id: "4",
       },
     ];
 
     return sampleArr;
+  };
+
+  const cards = await getCards();
+
+  const openSpecificProject = (cardNum) => {
+    for (let i = 0; i < cards.length; i++) {
+      if (cardNum === cards[i].id) {
+        specificProjectPage(cards[i]);
+        return;
+      }
+    }
+  };
+
+  if (specificPageOpen) {
+    openSpecificProject(specificPageOpen)
   };
 
   const leftCardArr = [];
@@ -108,7 +140,7 @@ const projectPage = async () => {
       const tagsArr = tagGenerator(cardContentArr[i].tags);
 
       const cardTemplate = `
-            <li class="project-card">
+            <li class="project-card" data-projectid="${cardContentArr[i].id}">
             <ul class="project-card-content">
               <li class="project-card-title">
                 <h3>${cardContentArr[i].title}</h3>
@@ -189,6 +221,7 @@ const projectPage = async () => {
   </aside>
     `;
 
+
   mainEl.innerHTML = projectPageContent;
 
   // Necessary elements
@@ -201,11 +234,20 @@ const projectPage = async () => {
   const addCardClickResponse = () => {
     const projectCardEls = Array.from(
       document.getElementsByClassName("project-card")
+
     );
 
     projectCardEls.forEach((card) => {
-      card.addEventListener("click", () => {
-        //  windowYOffset = window.scrollY;
+      card.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const cardNum = card.dataset.projectid;
+
+        openSpecificProject(cardNum);
+
+        specificPageOpen = cardNum;
+
       });
     });
   };
@@ -279,8 +321,6 @@ const projectPage = async () => {
       return sortCards(filteredCardsArr);
     }
   };
-
-  const cards = await getCards();
 
   const sortedCards = cardSorter(cards, filter, sort);
 

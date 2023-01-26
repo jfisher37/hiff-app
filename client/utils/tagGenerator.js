@@ -56,7 +56,6 @@ const tagGenerator = (tags) => {
       }
     });
 
-    console.log(tagsArr);
     return tagsArr;
 };
 
