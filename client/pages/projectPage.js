@@ -157,7 +157,7 @@ const projectPage = async (closed) => {
                 </ul>
               </li>
               <li class="project-card-school">
-                <h4 class="school-name">${cardContentArr[i].school}</h4>
+                <h4 class="school-name">School: ${cardContentArr[i].school}</h4>
               </li>
               <li class="project-card-budget">
                 <h4 class="budget">Budget: $${cardContentArr[i].budget}</h4>
