@@ -94,8 +94,6 @@ const specificProjectPage = async (project) => {
   </aside>
     `;
 
-    // TODO: the copyright aside isn't visible for longer pages. 
-
   mainEl.innerHTML = specificProjectContent;
 
     // close btn functionality:

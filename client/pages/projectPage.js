@@ -28,7 +28,7 @@ const sortSelection = {
 
 // var for whether or not specific page is open. Default to false
 
-let specificPageOpen = false;
+let specificPageOpen = 0;
 
 // TODO: SET IMAGES TO LAZY LOAD
 
@@ -36,7 +36,7 @@ const projectPage = async (closed) => {
 
   // create conditional statement for whether a specfic project page is still open:
   if (closed) {
-    specificPageOpen = false;
+    specificPageOpen = 0;
   } 
 
 
@@ -127,7 +127,9 @@ const projectPage = async (closed) => {
   };
 
   if (specificPageOpen) {
+    
     openSpecificProject(specificPageOpen)
+    return;
   };
 
   const leftCardArr = [];
