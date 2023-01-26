@@ -1,8 +1,22 @@
-import pageHandler from "./utils/pageHandler.js";
 import homepage from "./pages/homepage.js"
+import loggedInFrame from "./pages/loggedInFrame.js";
+import splashPage from "./pages/splashPage.js";
 
-//set up page handler
-pageHandler();
 
+// TODO: replace this with an auth function:
+const loggedIn = true;
+
+// If logged in, load logged in frame and homepage. If not, open splash page.
+
+if (loggedIn) {
+
+// load logged in frame:
+loggedInFrame();
+ 
 //initial load is homepage
 homepage();
+} else {
+
+    splashPage();
+};
+
