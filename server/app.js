@@ -1,10 +1,15 @@
-const express = require('express')
+const express = require('express');
+const { authRouter, userRouter, projectRouter } = require('./routes');
+
+
 const app = express()
 const PORT = process.env.PORT || 3000;
 
-app.get('/', (req, res) => {
-    res.send("Hello");
-})
+const apiRouter = express.Router();
+apiRouter.use(authRouter);
+apiRouter.use(userRouter);
+apiRouter.use(projectRouter);
+
 
 app.use(express.static('../client'));
 
