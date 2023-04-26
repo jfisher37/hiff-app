@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+const { Sequelize } = require('.');
 module.exports = (sequelize, DataTypes) => {
   class Project extends Model {
     /**
@@ -11,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.belongsToMany(models.user, {through: 'userProjects'})
+      this.belongsToMany(models.User, {through: 'userProjects'})
     }
   }
   Project.init({
@@ -32,22 +33,29 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     tags: {
-      type: DataTypes.ARRAY,
+      type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false
     },
     mainImg: DataTypes.STRING,
-    imgs: DataTypes.ARRAY,
+    imgs: DataTypes.ARRAY(DataTypes.STRING),
     approved: {
       type: DataTypes.BOOLEAN,
+      allowNull: false,
       defaultValue: false
     },
     createdAt: {
       type: DataTypes.DATE,
       allowNull: false
     },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
     id: {
       type: DataTypes.UUID,
-      allowNull: false
+      allowNull: false,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true
     },
   }, {
     sequelize,

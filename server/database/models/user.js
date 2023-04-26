@@ -11,8 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.hasMany(models.projects);
-      this.hasOne(models.token)
+      this.hasMany(models.Project);
+      this.hasOne(models.Token)
     }
   }
   User.init({
@@ -36,9 +36,15 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE,
       allowNull: false
     },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
     id: {
       type: DataTypes.UUID,
-      allowNull: false
+      allowNull: false,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true
     },
   }, {
     sequelize,

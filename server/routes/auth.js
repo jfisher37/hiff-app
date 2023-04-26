@@ -1,7 +1,7 @@
 const express = require('express');
 const crypto = require('crypto');
 const { Blob } = require('node:buffer');
-const { User, Token } = require('../models');
+const { User, Token } = require('../database/models');
 
 const authRouter = express.Router();
 

@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.belongsTo(models.user);
+      this.belongsTo(models.User);
     }
   }
   Token.init({
@@ -19,9 +19,15 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE,
       allowNull: false
     },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
     id: {
       type: DataTypes.UUID,
-      allowNull: false
+      defaultValue: DataTypes.UUIDV4,
+      allowNull: false,
+      primaryKey: true
     },
   
   }, {

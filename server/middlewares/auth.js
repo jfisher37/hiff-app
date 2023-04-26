@@ -1,4 +1,4 @@
-const { Token } = require('../models');
+const { Token } = require('../database/models');
 
 /**
  * Validates the token supplied in the header and sets req.user when valid.

@@ -5,14 +5,8 @@ module.exports = {
     await queryInterface.createTable('Tokens', {
       id: {
         allowNull: false,
-        autoIncrement: true,
+        defaultValue: Sequelize.UUIDV4,
         primaryKey: true,
-        type: Sequelize.INTEGER
-      },
-      createdAt: {
-        type: Sequelize.DATE
-      },
-      id: {
         type: Sequelize.UUID
       },
       createdAt: {

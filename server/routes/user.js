@@ -1,5 +1,5 @@
 const express = require('express');
-const { User } = require('../models');
+const { User } = require('../database/models');
 const { authenticationRequired } = require('../middlewares');
 
 const userRouter = express.Router();
@@ -12,3 +12,6 @@ userRouter.get('/self/', authenticationRequired, async (req, res) => {
   };
   res.send(userInfo);
 });
+
+
+module.exports = { userRouter };

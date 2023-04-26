@@ -2,6 +2,7 @@
 
 module.exports = {
   development: {
+    database: 'PSA',
     url: process.env.DEV_DATABASE_URL,
     dialect: 'postgres',
   },
