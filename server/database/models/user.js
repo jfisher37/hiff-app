@@ -1,4 +1,8 @@
 'use strict';
+
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+
 const {
   Model
 } = require('sequelize');
@@ -46,9 +50,31 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true
     },
-  }, {
+    password:{
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+  }, 
+  {
+    hooks: {
+      beforeValidate: (user, options) => {
+        bcrypt.hash(user.password, saltRounds, async function(err, hash) {
+          console.log("HEYY!!22222");
+          user.password = await hash;
+          console.log(this);
+          return user;
+      });
+      },
+      beforeUpdate: (user, options) => {
+        bcrypt.hash(user.password, saltRounds, function(err, hash) {
+          user.password = hash;
+      });
+      },
+    },
+
     sequelize,
     modelName: 'User',
-  });
+  },
+ );
   return User;
 };
