@@ -56,25 +56,45 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, 
   {
-    hooks: {
-      beforeValidate: (user, options) => {
-        bcrypt.hash(user.password, saltRounds, async function(err, hash) {
-          console.log("HEYY!!22222");
-          user.password = await hash;
-          console.log(this);
-          return user;
-      });
-      },
-      beforeUpdate: (user, options) => {
-        bcrypt.hash(user.password, saltRounds, function(err, hash) {
-          user.password = hash;
-      });
-      },
-    },
+    // hooks: {
+    //   beforeCreate: async (user, options) => {
+    //     bcrypt.hash(user.password, saltRounds, async function(err, hash) {
+    //       console.log("HEYY!!22222");
+    //       user.password = await hash;
+    //       console.log(user);
+    //       return user;
+    //   });
+    //   },
+    //   beforeUpdate: (user, options) => {
+    //     bcrypt.hash(user.password, saltRounds, function(err, hash) {
+    //       user.password = hash;
+    //   });
+    //   },
+    // },
 
     sequelize,
     modelName: 'User',
   },
  );
+
+ User.beforeCreate(async (user, options) => {
+  console.log("HERE!!");
+  const hashedPassword = await bcrypt.hash(user.password, saltRounds);
+  console.log("HP:", await hashedPassword);
+  user.password = await hashedPassword;
+});
+
+User.afterFind(async (options, row, param) => {
+
+  if(row.where.password){
+  console.log("THIS:", User);
+  console.log("options:", options);
+  console.log("param:", param);
+  bcrypt.compare(row.where.password, hash, function(err, result) {
+    return result
+});
+} else {console.log("FUCK OFF");}
+});
+
   return User;
 };

@@ -19,6 +19,7 @@ userRouter.post('/signup/', async (req, res) => {
   const school = req.body.school.toLowerCase();
   const { password } = req.body;
 
+  // Make sure password isn't too long
   if (new Blob([password]).size > 4096) {
     return res.status(400).send('password too long');
   }
@@ -33,26 +34,10 @@ userRouter.post('/signup/', async (req, res) => {
       school: school,
     }
   });
-  console.log(user.first); // 'sdepold'
-  console.log(user.password); // This may or may not be 'Technical Lead JavaScript'
-  console.log(created); // The boolean indicating whether this instance was just created
+
   if (created) {
-    console.log(user.last); 
-    res.send(user);
+    res.send(`${user.first}'s account has been created`);
   }
-
-
-
-  // // TODO: fix flow so we don't need to set empty password (currently a hack)
-  // let newUser = User.fromJson({ id: '', username, password: '' });
-  // newUser.setPassword(password);
-  // newUser.setId();
-  // newUser = await User.query()
-  //   .insert(newUser)
-  //   .returning('*');
-
-  // // TODO: don't send hashed password back
-  // res.send(newUser.toJSON());
 });
 
 

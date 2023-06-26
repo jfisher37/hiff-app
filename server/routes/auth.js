@@ -1,5 +1,5 @@
 const express = require('express');
-const crypto = require('crypto');
+const { v4: uuidv4 } = require('uuid');
 const { Blob } = require('node:buffer');
 const { User, Token } = require('../database/models');
 
@@ -13,30 +13,31 @@ authRouter.post('/login/', async (req, res) => {
     return res.status(401).json({ message: 'Invalid username or password' });
   }
 
-  const userResult = await User.query().where({
-    username: req.body.username.toLowerCase(),
-  });
-
-  if (!userResult.length || !userResult[0].validatePassword(password)) {
-    return res.status(401).json({ message: 'Invalid username or password' });
+  const user = await User.findOne({ where: { email: req.body.email, password: password } });
+  if (user === null) {
+    console.log('Incorrect email or password');
+  } else {
+    console.log("FOUND!!!", user)
   }
 
-  const user = userResult[0];
-  const tokenId = crypto.randomUUID();
-  await Token.query()
-    .insert({
-      id: tokenId,
-      user_id: user.id
-    });
+  const tokenId = uuidv4();
+
+  console.log("TOKEN:", tokenId);
+
+  // await Token.query()
+  //   .insert({
+  //     id: tokenId,
+  //     user_id: user.id
+  //   });
 
   //userInfo without password
-  const userInfo = {
-    id: user.id,
-    username: user.username,
-    down: user.down
-  };
+  // const userInfo = {
+  //   id: user.id,
+  //   username: user.username,
+  //   down: user.down
+  // };
 
-  res.send({ token: tokenId, user: userInfo });
+  // res.send({ token: tokenId, user: user });
 });
 
 module.exports = { authRouter };
