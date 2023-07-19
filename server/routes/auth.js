@@ -23,13 +23,10 @@ authRouter.post("/login/", async (req, res) => {
     const result = await bcrypt.compare(password, user.password);
 
     if (result) {
-      res.send(`Welcome, ${user.first}`);
+      await Token.destroy({ where: { UserId: user.id } });
+      
       const tokenId = uuidv4();
       const UserId = user.id; // userId is now defined and ready to use
-
-      console.log("TOKEN:", tokenId);
-      console.log("USERID:", UserId);
-      console.log("WHY?!?!?!?");
 
       const token = await Token.create({
         id: tokenId,
@@ -37,6 +34,7 @@ authRouter.post("/login/", async (req, res) => {
         expiresAt: new Date(Date.now() + 72 * 60 * 60 * 1000),
       });
 
+      res.json(token.id);
       return result;
     } else {
       res.send("Incorrect email or password");

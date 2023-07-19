@@ -1,2 +1,2 @@
-const { authenticationRequired } = require('./auth');
+const authenticationRequired = require('./auth');
 module.exports = { authenticationRequired };

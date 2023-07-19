@@ -7,12 +7,10 @@ const saltRounds = 10;
 
 const userRouter = express.Router();
 
+console.log("AUTH",authenticationRequired);
+
 userRouter.get('/self/', authenticationRequired, async (req, res) => {
-  const userInfo = {
-    id: req.user.id,
-    username: req.user.username,
-  };
-  res.send(userInfo);
+res.send(`${req.user.first} is logged in!`)
 });
 
 userRouter.post('/signup/', async (req, res) => {

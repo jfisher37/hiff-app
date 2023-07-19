@@ -1,44 +1,37 @@
-const { Token } = require('../database/models');
+const { Token, User } = require("../database/models");
 
-/**
- * Validates the token supplied in the header and sets req.user when valid.
- * Token is expected in Authorization header formatted as: Bearer <token>
- * @param { import('express').Request } req Express request object.
- * @param { import('express').Response } res Express response object.
- * @param { import('express').NextFunction } next Express next function.
- * @returns { Promise<void> }
- */
-async function authenticationRequired(req, res, next) {
+const authenticationRequired = async (req, res, next) => {
+
+  const token = req.headers.authorization; // Assuming the token is provided in the "Authorization" header
+
+  if (!token) {
+    return res.status(401).json({ message: "No token provided" });
+  }
+
   try {
-    const tokenHeader = req.header('authorization');
-    if (typeof tokenHeader !== 'string' || !tokenHeader.startsWith('Bearer ')) {
-      return res.status(401).send();
+    const foundToken = await Token.findOne({
+      where: { id: token },
+      include: [{ model: User, as: "User" }], // Include the associated User model based on the foreign key UserId
+    });
+
+    if (!foundToken) {
+      return res.status(401).json({ message: "Invalid token" });
     }
-    const tokenId = 
-    
-    // TODO: Double Check substring
-    tokenHeader.substring(7);
 
-    // TODO: Create a sequelize query for finding a token with it's connected user
-    const tokenRows = {};
-    
-    // await Token.query()
-    //   .where({ 'tokens.id': tokenId })
-    //   .withGraphJoined('user');
-
-    // 7 days in milliseconds
-    const tokenDuration = 7 * 24 * 60 * 60 * 1000;
+    // Check if the token has not expired (expiresAt is in the future)
     const now = new Date();
-    if (!tokenRows.length || tokenRows[0].created_at < now - tokenDuration) {
-      return res.status(401).send();
+    if (foundToken.expiresAt <= now) {
+      return res.status(401).json({ message: "Token has expired" });
     }
 
-    req.user = tokenRows[0].user;
-    return next();
-  }
-  catch (error) {
-    return next(error);
-  }
-}
+    // Token is valid, attach the associated user to the request for further use in the route handlers
+    req.user = foundToken.User;
 
-module.exports = { authenticationRequired };
+    next();
+  } catch (error) {
+    console.error("Error during authentication:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+module.exports = authenticationRequired;
