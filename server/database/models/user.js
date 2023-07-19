@@ -1,8 +1,5 @@
 'use strict';
 
-const bcrypt = require('bcrypt');
-const saltRounds = 10;
-
 const {
   Model
 } = require('sequelize');
@@ -15,7 +12,6 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.hasMany(models.Project);
       this.hasOne(models.Token)
     }
   }
@@ -29,10 +25,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     email: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    school: {
       type: DataTypes.STRING,
       allowNull: false
     },
@@ -77,24 +69,24 @@ module.exports = (sequelize, DataTypes) => {
   },
  );
 
- User.beforeCreate(async (user, options) => {
-  console.log("HERE!!");
-  const hashedPassword = await bcrypt.hash(user.password, saltRounds);
-  console.log("HP:", await hashedPassword);
-  user.password = await hashedPassword;
-});
+//  User.beforeCreate(async (user, options) => {
+//   console.log("HERE!!");
+//   const hashedPassword = await bcrypt.hash(user.password, saltRounds);
+//   console.log("HP:", await hashedPassword);
+//   user.password = await hashedPassword;
+// });
 
-User.afterFind(async (options, row, param) => {
+// User.afterFind(async (options, row, param) => {
 
-  if(row.where.password){
-  console.log("THIS:", User);
-  console.log("options:", options);
-  console.log("param:", param);
-  bcrypt.compare(row.where.password, hash, function(err, result) {
-    return result
-});
-} else {console.log("FUCK OFF");}
-});
+//   if(row.where.password){
+//   console.log("THIS:", User);
+//   console.log("options:", options);
+//   console.log("param:", param);
+//   bcrypt.compare(row.where.password, hash, function(err, result) {
+//     return result
+// });
+// } else {console.log("FUCK OFF");}
+// });
 
   return User;
 };

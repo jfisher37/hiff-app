@@ -9,6 +9,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.UUID
       },
+      UserId: {
+        allowNull: false,
+        type: Sequelize.UUID
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -16,7 +20,11 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-      }
+      },
+      expiresAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
     });
   },
   async down(queryInterface, Sequelize) {

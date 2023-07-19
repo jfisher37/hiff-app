@@ -9,6 +9,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.UUID
       },
+      school: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       title: {
         type: Sequelize.STRING,
         allowNull: false,

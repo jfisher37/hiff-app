@@ -1,7 +1,9 @@
 'use strict';
+
 const {
   Model
 } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Token extends Model {
     /**
@@ -22,6 +24,10 @@ module.exports = (sequelize, DataTypes) => {
     updatedAt: {
       type: DataTypes.DATE,
       allowNull: false
+    },
+    expiresAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
     },
     id: {
       type: DataTypes.UUID,

@@ -21,10 +21,6 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      school: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
       password: {
         type: Sequelize.STRING,
         allowNull: false,

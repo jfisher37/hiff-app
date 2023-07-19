@@ -12,11 +12,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.belongsToMany(models.User, {through: 'userProjects'})
     }
   }
   Project.init({
     title: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    school: {
       type: DataTypes.STRING,
       allowNull: false
     },
@@ -26,10 +29,6 @@ module.exports = (sequelize, DataTypes) => {
     },
     solving: {
       type: DataTypes.STRING,
-      allowNull: false
-    },
-    budget: {
-      type: DataTypes.INTEGER,
       allowNull: false
     },
     tags: {
