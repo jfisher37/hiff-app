@@ -60,7 +60,7 @@ projectRouter.get('/get-single-project', async (req, res) => {
   });
   
 
-//Edit project:
+//Update project:
 projectRouter.put('/update-project', async (req, res) => {
     const projectId = req.body.id;
   
