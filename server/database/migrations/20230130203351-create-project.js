@@ -25,10 +25,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      budget: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-      },
+ 
       tags: {
         type: Sequelize.ARRAY(Sequelize.STRING),
         allowNull: false,
