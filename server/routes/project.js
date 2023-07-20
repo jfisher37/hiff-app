@@ -4,6 +4,8 @@ const { authenticationRequired } = require('../middlewares');
 
 const projectRouter = express.Router();
 
+//TODO: Add spec. authorization (maybe do it through authenticationRequired) just for admin
+
 //Create projects:
 projectRouter.post('/create-project', async (req, res) => {
     try {
@@ -30,15 +32,82 @@ projectRouter.post('/create-project', async (req, res) => {
 
 //Get projects:
 projectRouter.get('/get-projects', async (req, res) => {
-    console.log("HERE!!!!")
+    try {
+        // Retrieve all projects from the database
+        const allProjects = await Project.findAll();
+        res.json(allProjects);
+      } catch (error) {
+        console.error('Error retrieving projects:', error);
+        res.status(500).json({ message: 'Internal server error' });
+      }
 });
 
 //Get specific project?
+projectRouter.get('/get-single-project', async (req, res) => {
+    const projectId = req.body.id;
+  
+    try {
+      const project = await Project.findByPk(projectId);
+      if (!project) {
+        return res.status(404).json({ message: 'Project not found' });
+      }
+  
+      res.json(project);
+    } catch (error) {
+      console.error('Error finding project:', error);
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  });
+  
 
-//Edit projects:
+//Edit project:
+projectRouter.put('/update-project', async (req, res) => {
+    const projectId = req.body.id;
+  
+    try {
+      const project = await Project.findByPk(projectId);
+      if (!project) {
+        return res.status(404).json({ message: 'Project not found' });
+      }
+  
+      // Update project information based on req.body
+      const { title, school, proposal, solving, tags, mainImg, imgs, approved } = req.body;
+  
+      await project.update({
+        title,
+        school,
+        proposal,
+        solving,
+        tags,
+        mainImg,
+        imgs,
+        approved,
+      });
+  
+      res.json({ message: 'Project updated successfully' });
+    } catch (error) {
+      console.error('Error updating project:', error);
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  });
 
-//Delete projects:
-
+//Delete project:
+projectRouter.delete('/delete-project', async (req, res) => {
+    const projectId = req.body.id;
+  
+    try {
+      const project = await Project.findByPk(projectId);
+      if (!project) {
+        return res.status(404).json({ message: 'Project not found' });
+      }
+  
+      await project.destroy();
+      res.json({ message: 'Project deleted successfully' });
+    } catch (error) {
+      console.error('Error deleting project:', error);
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  });
 
 
 module.exports = { projectRouter };
