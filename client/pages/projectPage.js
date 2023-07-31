@@ -46,6 +46,16 @@ const projectPage = async (closed) => {
   const getCards = async () => {
     // TODO: Change to funtion that fetches cards from db
 
+    const url = '/api/get-projects'
+    const cardsJson = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        'authorization': `3e9cc126-543b-4185-b79d-a1c9af5f601e`,
+      },
+    });
+    const cardsArr = await cardsJson.json();
+
     //TODO: add category for creation date
 
     const sampleArr = [
@@ -112,7 +122,7 @@ const projectPage = async (closed) => {
       },
     ];
 
-    return sampleArr;
+    return cardsArr;
   };
 
   const cards = await getCards();
