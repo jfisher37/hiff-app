@@ -7,7 +7,7 @@ const projectRouter = express.Router();
 //TODO: Add spec. authorization (maybe do it through authenticationRequired) just for admin
 
 //Create projects:
-projectRouter.post('/create-project', async (req, res) => {
+projectRouter.post('/create-project', authenticationRequired, async (req, res) => {
     try {
       const { title, school, proposal, solving, tags, mainImg, imgs } = req.body;
   
@@ -31,7 +31,7 @@ projectRouter.post('/create-project', async (req, res) => {
   });
 
 //Get projects:
-projectRouter.get('/get-projects', async (req, res) => {
+projectRouter.get('/get-projects', authenticationRequired, async (req, res) => {
     try {
         // Retrieve all projects from the database
         const allProjects = await Project.findAll();
@@ -43,7 +43,7 @@ projectRouter.get('/get-projects', async (req, res) => {
 });
 
 //Get specific project?
-projectRouter.get('/get-single-project', async (req, res) => {
+projectRouter.get('/get-single-project', authenticationRequired, async (req, res) => {
     const projectId = req.body.id;
   
     try {
@@ -61,7 +61,7 @@ projectRouter.get('/get-single-project', async (req, res) => {
   
 
 //Update project:
-projectRouter.put('/update-project', async (req, res) => {
+projectRouter.put('/update-project', authenticationRequired, async (req, res) => {
     const projectId = req.body.id;
   
     try {
@@ -92,7 +92,7 @@ projectRouter.put('/update-project', async (req, res) => {
   });
 
 //Delete project:
-projectRouter.delete('/delete-project', async (req, res) => {
+projectRouter.delete('/delete-project',authenticationRequired, async (req, res) => {
     const projectId = req.body.id;
   
     try {
