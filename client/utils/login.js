@@ -18,7 +18,6 @@ const login = async (email, password) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      authorization: `3e9cc126-543b-4185-b79d-a1c9af5f601e`,
     },
     body: JSON.stringify(data),
   });

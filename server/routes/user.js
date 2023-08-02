@@ -17,7 +17,7 @@ userRouter.post('/signup/', async (req, res) => {
 
   // Make sure password isn't too long
   if (new Blob([password]).size > 4096) {
-    return res.status(400).send('password too long');
+    return res.status(400).json( {message: 'password too long'});
   }
 
   const hashedPassword = await bcrypt.hash(password, saltRounds);
@@ -33,9 +33,9 @@ userRouter.post('/signup/', async (req, res) => {
   });
 
   if (created) {
-    res.send(`${user.first}'s account has been created`);
+    res.json({message: `${user.first}'s account has been created`});
   } else {
-    res.send('An account is already attached to this email address.')
+    res.json({message: 'An account is already attached to this email address.'})
   }
 });
 
