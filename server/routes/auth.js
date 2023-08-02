@@ -7,10 +7,11 @@ const bcrypt = require("bcrypt");
 const authRouter = express.Router();
 
 authRouter.post("/login/", async (req, res) => {
+  console.log("BODY", req.body);
   const password = req.body.password;
   // Automatically deny long passwords since they can overload hashing algorithm.
   if (new Blob([password]).size > 4096) {
-    return res.status(401).json({ message: "Invalid username or password" });
+    return res.status(401).json({ message: "Invalid email or password" });
   }
 
   try {
@@ -37,7 +38,7 @@ authRouter.post("/login/", async (req, res) => {
       res.json(token.id);
       return result;
     } else {
-      res.send("Incorrect email or password");
+      res.json({ message: "Incorrect email or password"});
     }
   } catch (error) {
     console.error("Error during login:", error);

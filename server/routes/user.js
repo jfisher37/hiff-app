@@ -35,7 +35,7 @@ userRouter.post('/signup/', async (req, res) => {
 
   const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-  //checks to see if username already exists
+  //checks to see if acct for email already exists
   const [user, created] = await User.findOrCreate({
     where: { email },
     defaults: {
