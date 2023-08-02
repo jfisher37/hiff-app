@@ -2,9 +2,17 @@ const express = require("express");
 const { v4: uuidv4 } = require("uuid");
 const { Blob } = require("node:buffer");
 const { User, Token } = require("../database/models");
+const { authenticationRequired } = require('../middlewares');
 const bcrypt = require("bcrypt");
 
 const authRouter = express.Router();
+
+//authenticate that cookie is good with simple boolean response:
+authRouter.get('/cookieLogin/', authenticationRequired, async (req, res) => {
+  const reply = true;
+
+    res.send(reply);
+  });
 
 authRouter.post("/login/", async (req, res) => {
   console.log("BODY", req.body);

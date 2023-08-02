@@ -10,9 +10,9 @@ const signUpPage = async () => {
     </div>
     <form id="sign-up-form">
     <ul id="sign-up-inputs">
-      <li id="sign-up-username">
-        <label for="username">Username:</label>
-        <input class="sign-up-input" name="username">
+      <li id="sign-up-email">
+        <label for="email">Email:</label>
+        <input class="sign-up-input" name="email">
       </li>
       <li id="sign-up-password">
         <label for="password">Password:</label>
@@ -41,14 +41,15 @@ const signUpPage = async () => {
       return await module.default;
     });
 
+    //TODO: Add first/last name fields to this
     // TODO: De-comment when sign up function is in:
   // const signUp = await import("../utils/signUp.js").then(async (module) => {
   //   return await module.default;
   // });
 
     //input els
-    const usernameLi = document.getElementById("sign-up-username");
-    const usernameInput = usernameLi.getElementsByTagName("input")[0];
+    const emailLi = document.getElementById("sign-up-email");
+    const emailInput = emailLi.getElementsByTagName("input")[0];
 
     const passwordLi = document.getElementById("sign-up-password");
     const passwordInput = passwordLi.getElementsByTagName("input")[0];
@@ -71,12 +72,13 @@ const signUpPage = async () => {
       
     //   if (passwordInput.value === confirmPasswordInput.value) {
 
-    //     const signUpRes = await signUp(usernameInput.value, passwordInput.value);
+    //     const signUpRes = await signUp(emailInput.value, passwordInput.value);
 
         
 
-    //     if(signUpRes === "Username already taken") {
-    //       errorMessageEl.innerHTML = `${usernameInput.value} is already taken.`
+    //TODO: refactor these errors to match sign up route.
+    //     if(signUpRes === "Email already taken") {
+    //       errorMessageEl.innerHTML = `${emailInput.value} is already taken.`
     //     }
     //   } else {
 

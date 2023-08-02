@@ -44,7 +44,6 @@ const projectPage = async (closed) => {
   const mainEl = document.getElementById("main");
 
   const getCards = async () => {
-    // TODO: Change to funtion that fetches cards from db
 
     const url = '/api/get-projects'
     const cardsJson = await fetch(url, {

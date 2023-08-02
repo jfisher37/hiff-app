@@ -1,24 +1,11 @@
 const express = require('express');
 const { User } = require('../database/models');
 const { authenticationRequired } = require('../middlewares');
-const { capitalize }  = require('../utils/casing');
-
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 const userRouter = express.Router();
 
-//Get own info:
-userRouter.get('/self/', authenticationRequired, async (req, res) => {
-const userInfo = {
-  id: req.user.id,
-  first: capitalize(req.user.first),
-  last: capitalize(req.user.last),
-  email: req.user.email,
-}
-
-  res.send(userInfo);
-});
 
 //Sign up route:
 userRouter.post('/signup/', async (req, res) => {
