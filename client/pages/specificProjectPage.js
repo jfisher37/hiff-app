@@ -35,7 +35,7 @@ const specificProjectPage = async (project) => {
     }
   };
 
-  const projectPicsEl = projectPicGenerator(project.photos);
+  const projectPicsEl = projectPicGenerator(project.imgs);
 
   const specificProjectContent = `
     <div id="close-specific-project-btn-contain">
@@ -61,25 +61,13 @@ const specificProjectPage = async (project) => {
     </ul>
     <aside id="specific-project-sidebar">
       <ul id="specific-project-sidebar-content">
-        <li id="specific-project-profile-pic-contain">
-          <img id="specific-project-profile-pic" src="${
-            project.profilePic
-          }" alt="${project.firstName} ${project.lastName}'s profile picture">
-        </li>
-        <li id="specific-project-profile-name-contain">
-          <h4 id="specific-project-profile-name">${project.firstName} ${
-    project.lastName
-  }</h4>
+        <li id="specific-project-main-img-contain">
+          <img id="specific-project-main-img" src="${
+            project.mainImg
+          }" alt="${project.title}'s primary image">
         </li>
         <li id="specific-project-school-contain">
-          <p id="specific-project-school"><span class="school-budget">School: </span>${
-            project.school
-          }</p>
-        </li>
-        <li id="specific-project-budget-contain">
-          <p id="specific-project-budget"><span class="school-budget">Budget: </span>$${
-            project.budget
-          }</p>
+          <h4 id="specific-project-school">${project.school}</h4>
         </li>
         <li id="specific-project-tags-contain">
           <ul id="specific-project-tags">

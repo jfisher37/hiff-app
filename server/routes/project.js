@@ -11,6 +11,7 @@ projectRouter.post('/create-project', authenticationRequired, async (req, res) =
     try {
       const { title, school, proposal, solving, tags, mainImg, imgs } = req.body;
   
+      //TODO: add video field and remove approved field.
       // Create a new project instance with the provided data
       const project = await Project.create({
         title,

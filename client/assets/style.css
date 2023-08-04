@@ -491,11 +491,11 @@ select {
   text-align: center;
 }
 
-.project-card-person {
+.project-card-main-img {
   margin-bottom: .6rem;
 }
 
-.project-card-person-ul {
+.project-card-main-img-ul {
   /* display: grid;
   grid-template-columns: [start] 40% [middle] 60% [end];
   grid-template-rows: [start] 100% [end]; */
@@ -505,7 +505,7 @@ select {
   align-items: center;
 }
 
-.person-pic-contain {
+.main-img-contain {
   /* grid-column: start / middle;
   grid-row: start / end; */
   display: flex;
@@ -513,14 +513,14 @@ select {
   justify-content: center;
 }
 
-.person-pic {
+.main-img {
   height: 95%;
   width: 95%;
   /* border-radius: 50%; */
   /* border: solid black 1px; */
 }
 
-.person-name-contain {
+.school-name-contain {
   /* grid-column: middle / end;
   grid-row: start / end; */
   margin-top: .5rem;
@@ -532,9 +532,9 @@ select {
   justify-content: space-evenly;
 }
 
-.person-name-contain h3 {
+.school-name-contain h3 {
   text-align: center;
-  font-size: .9rem;
+  font-size: 1.2rem;
 }
 
 .project-card-school {
@@ -546,12 +546,12 @@ select {
   font-weight: 600;
 }
 
-.project-card-budget {
+.project-card-solving {
   margin-bottom: .5rem;
   width: 96%;
 }
 
-.budget {
+.solving {
   font-weight: 600;
 }
 
@@ -692,7 +692,6 @@ select {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-evenly;
 }
 
 .specific-project-pic-contain {
@@ -700,7 +699,9 @@ select {
 }
 
 .specific-project-pic {
-  width: 100%;
+  width: 90%;
+  object-fit: cover;
+  height: 90%;
 }
 
 
@@ -722,7 +723,7 @@ select {
   align-items: center;
 }
 
-#specific-project-profile-pic-contain {
+#specific-project-main-img-contain {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -730,35 +731,18 @@ select {
   margin-bottom: 20px;
 }
 
-#specific-project-profile-pic {
+#specific-project-main-img {
   width: 90%;
 }
 
-#specific-project-profile-name-contain {
+#specific-project-school-contain {
   width: 100%;
   margin-bottom: 15px;
 }
 
-#specific-project-profile-name {
+#specific-project-school {
   text-align: center;
   color: black;
-}
-
-#specific-project-school-contain, #specific-project-budget-contain {
-  width: 95%;
-}
-
-#specific-project-school-contain {
-  margin-bottom: 10px;
-}
-
-#specific-project-budget-contain {
-  margin-bottom: 20px;
-}
-
-#specific-project-school, #specific-project-budget {
-  color: var(--cream);
-  font-size: .8rem;
 }
 
 /* Partner page */
