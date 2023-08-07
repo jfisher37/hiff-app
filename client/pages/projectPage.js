@@ -53,7 +53,7 @@ const projectPage = async (closed) => {
     return projects;
   };
 
-  const cards = await getCards();
+  let cards = await getCards();
 
   const openSpecificProject = (cardNum) => {
     for (let i = 0; i < cards.length; i++) {
@@ -190,11 +190,10 @@ const projectPage = async (closed) => {
 
   const cardSorter = (cardsArr, filter, sort) => {
     const sortCards = (filteredCards) => {
-      if (sort === "newest") {
-        return filteredCards.sort((a, b) => {a.createdAt - b.createdAt; console.log("A", a.createdAt); console.log("B", b.createdAt);} );
+      if (sort === "newest") {  
+        return filteredCards.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
       } else if (sort === "oldest") {
-        console.log("oldest");
-        return filteredCards.sort((a, b) => b.createdAt - a.createdAt);
+        return filteredCards.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
       }
     };
 

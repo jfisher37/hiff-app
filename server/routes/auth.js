@@ -15,7 +15,6 @@ authRouter.get('/cookieLogin/', authenticationRequired, async (req, res) => {
   });
 
 authRouter.post("/login/", async (req, res) => {
-  console.log("BODY", req.body);
   const password = req.body.password;
   const email = req.body.email.toLowerCase();
   // Automatically deny long passwords since they can overload hashing algorithm.
