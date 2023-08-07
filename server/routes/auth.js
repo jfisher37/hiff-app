@@ -17,13 +17,14 @@ authRouter.get('/cookieLogin/', authenticationRequired, async (req, res) => {
 authRouter.post("/login/", async (req, res) => {
   console.log("BODY", req.body);
   const password = req.body.password;
+  const email = req.body.email.toLowerCase();
   // Automatically deny long passwords since they can overload hashing algorithm.
   if (new Blob([password]).size > 4096) {
     return res.status(401).json({ message: "Invalid email or password" });
   }
 
   try {
-    const user = await User.findOne({ where: { email: req.body.email } });
+    const user = await User.findOne({ where: { email } });
 
     if (!user) {
       return res.status(401).json({ message: "Incorrect email or password" });

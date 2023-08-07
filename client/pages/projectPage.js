@@ -24,7 +24,7 @@ const filterSelection = {
 
 const sortSelection = {
   newest: "selected",
-  budget: "",
+  oldest: "",
 };
 
 // var for whether or not specific page is open. Default to false
@@ -143,8 +143,8 @@ const projectPage = async (closed) => {
         </li>
         <li id="project-sort-li">
           <select name="project-sort-select">
-            <option ${sortSelection.newest} value="newest">Newest</option>
-            <option ${sortSelection.budget} value="budget">Budget</option>
+            <option ${sortSelection.newest} value="newest">Newest First</option>
+            <option ${sortSelection.oldest} value="oldest">Oldest First</option>
           </select>
         </li>
       </ul>
@@ -191,9 +191,10 @@ const projectPage = async (closed) => {
   const cardSorter = (cardsArr, filter, sort) => {
     const sortCards = (filteredCards) => {
       if (sort === "newest") {
-        return filteredCards.sort((a, b) => a.createdAt - b.createdAt);
-      } else if (sort === "budget") {
-        return filteredCards.sort((a, b) => a.budget - b.budget);
+        return filteredCards.sort((a, b) => {a.createdAt - b.createdAt; console.log("A", a.createdAt); console.log("B", b.createdAt);} );
+      } else if (sort === "oldest") {
+        console.log("oldest");
+        return filteredCards.sort((a, b) => b.createdAt - a.createdAt);
       }
     };
 
