@@ -136,9 +136,6 @@ const projectPage = async (closed) => {
               <option ${filterSelection.southPhilly} value="southPhilly">South Philly</option>
               <option ${filterSelection.westPhilly} value="westPhilly">West Philly</option>
             </optgroup>
-            <optgroup label="School">
-              <option value="test">Test</option>
-            </optgroup>
           </select>
         </li>
         <li id="project-sort-li">

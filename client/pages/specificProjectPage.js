@@ -1,6 +1,8 @@
 import tagGenerator from "../utils/tagGenerator.js";
 import projectPage from "./projectPage.js";
 
+let currentPhotoIndex = 0;
+
 const specificProjectPage = async (project) => {
   const mainEl = document.getElementById("main");
 
@@ -38,6 +40,14 @@ const specificProjectPage = async (project) => {
   const projectPicsEl = projectPicGenerator(project.imgs);
 
   const specificProjectContent = `
+  <div class="enlarged-photo-modal" id="enlarged-photo-modal">
+  <span class="modal-close" id="modal-close">&times;</span>
+  <div class="modal-content">
+    <img class="enlarged-photo" id="enlarged-photo" src="" alt="Enlarged Photo">
+    <a class="prev" id="prev">&#10094;</a>
+    <a class="next" id="next">&#10095;</a>
+  </div>
+</div>
     <div id="close-specific-project-btn-contain">
     <button id="close-specific-project-btn"><i class="fa-regular fa-circle-left"></i></button>
   </div>
@@ -92,6 +102,49 @@ const specificProjectPage = async (project) => {
   
       projectPage("closed")
     });
+
+    //photo enlage functionality: 
+    // Inside the specificProjectPage function
+const photoContainers = document.querySelectorAll(".specific-project-pic-contain");
+const enlargedPhotoModal = document.getElementById("enlarged-photo-modal");
+const enlargedPhoto = document.getElementById("enlarged-photo");
+const modalCloseBtn = document.getElementById("modal-close");
+const prevBtn = document.getElementById("prev");
+const nextBtn = document.getElementById("next");
+
+// Open the modal and show the clicked image
+photoContainers.forEach((container, index) => {
+  const img = container.querySelector(".specific-project-pic");
+  img.addEventListener("click", () => {
+    currentPhotoIndex = index;
+    enlargedPhoto.src = img.src;
+    enlargedPhotoModal.style.display = "block";
+  });
+});
+
+// Close the modal
+modalCloseBtn.addEventListener("click", () => {
+  enlargedPhotoModal.style.display = "none";
+});
+
+// Navigate to the previous photo
+prevBtn.addEventListener("click", () => {
+  currentPhotoIndex = (currentPhotoIndex - 1 + photoContainers.length) % photoContainers.length;
+  enlargedPhoto.src = photoContainers[currentPhotoIndex].querySelector(".specific-project-pic").src;
+});
+
+// Navigate to the next photo
+nextBtn.addEventListener("click", () => {
+  currentPhotoIndex = (currentPhotoIndex + 1) % photoContainers.length;
+  enlargedPhoto.src = photoContainers[currentPhotoIndex].querySelector(".specific-project-pic").src;
+});
+
+// Close modal when clicking outside the photo
+window.addEventListener("click", (event) => {
+  if (event.target === enlargedPhotoModal) {
+    enlargedPhotoModal.style.display = "none";
+  }
+});
 };
 
 export default specificProjectPage;
