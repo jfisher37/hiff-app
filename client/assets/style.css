@@ -628,6 +628,7 @@ select {
  color: var(--main);
  background: none;
  border: none;
+ cursor: pointer;
 }
 
 #specific-project-page {
@@ -733,6 +734,7 @@ select {
 
 #specific-project-main-img {
   width: 90%;
+  padding-top: 3%;
 }
 
 #specific-project-school-contain {

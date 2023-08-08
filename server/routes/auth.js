@@ -7,6 +7,8 @@ const bcrypt = require("bcrypt");
 
 const authRouter = express.Router();
 
+//TODO: add admin auth via adding something to the response object indicating admin.
+
 //authenticate that cookie is good with simple boolean response:
 authRouter.get('/cookieLogin/', authenticationRequired, async (req, res) => {
   const reply = true;
