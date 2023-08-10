@@ -616,14 +616,14 @@ select {
 
 /* Specific Project Page */
 
-#close-specific-project-btn-contain {
+#close-specific-project-btn-contain, #close-edit-project-btn-contain {
   margin-top: -20px;
   width: 93%;
   display: flex;
   justify-content: flex-start;
 }
 
-#close-specific-project-btn {
+#close-specific-project-btn, #close-edit-project-btn  {
  font-size: 1.5rem;
  color: var(--main);
  background: none;
@@ -631,7 +631,7 @@ select {
  cursor: pointer;
 }
 
-#specific-project-page {
+#specific-project-page, #edit-project-page {
   margin-top: 20px;
   margin-bottom: 40px;
   display: grid;
@@ -640,13 +640,13 @@ select {
   grid-template-rows: [start] 100% [end];
 }
 
-#specific-project-info, #specific-project-sidebar {
+#specific-project-info, #specific-project-sidebar, #edit-project-info, #edit-project-sidebar {
   grid-row-start: start;
   grid-row-end: end;
 
 }
 
-#specific-project-info {
+#specific-project-info, #edit-project-info {
   grid-column-start: start;
   grid-column-end: middle;
   width: 90%;
@@ -658,7 +658,7 @@ select {
   align-items: flex-start;
 }
 
-#specific-project-title {
+#specific-project-title, #edit-project-title {
   font-family: var(--logo-font);
   color: var(--secondary);
   text-align: center;
@@ -666,7 +666,7 @@ select {
   margin-bottom: 30px;
 }
 
-#specific-project-solving, #specific-project-proposal {
+#specific-project-solving, #specific-project-proposal, #edit-project-solving, #edit-project-proposal {
   line-height: 1.25rem;
 }
 
@@ -675,11 +675,11 @@ select {
   color: var(--secondary);
 }
 
-#specific-project-solving-contain {
+#specific-project-solving-contain, #edit-project-solving-contain {
   margin-bottom: 15px;
 }
 
-#specific-project-pics-contain {
+#specific-project-pics-contain, #edit-project-pics-contain {
   width: 100%;
   margin-top: 25px;
   border-top: solid var(--secondary) 2px;
@@ -688,25 +688,25 @@ select {
   padding-top: 15px;
 }
 
-#specific-project-pics {
+#specific-project-pics, #edit-project-pics {
   width: 95%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
 
-.specific-project-pic-contain {
+.specific-project-pic-contain, .edit-project-pic-contain {
   width: 30%;
 }
 
-.specific-project-pic {
+.specific-project-pic, .edit-project-pic {
   width: 90%;
   object-fit: cover;
   height: 90%;
 }
 
 
-#specific-project-sidebar {
+#specific-project-sidebar, #edit-project-sidebar {
   grid-column-start: middle;
   grid-column-end: end;
   width: 100%;
@@ -714,7 +714,7 @@ select {
   justify-content: center;
 }
 
-#specific-project-sidebar-content {
+#specific-project-sidebar-content, #edit-project-sidebar-content {
   width: 97%;
   background-color: var(--main);
   border-radius: 5px;
@@ -724,7 +724,7 @@ select {
   align-items: center;
 }
 
-#specific-project-main-img-contain {
+#specific-project-main-img-contain, #edit-project-main-img-contain {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -732,17 +732,17 @@ select {
   margin-bottom: 20px;
 }
 
-#specific-project-main-img {
+#specific-project-main-img, #edit-project-main-img {
   width: 90%;
   padding-top: 3%;
 }
 
-#specific-project-school-contain {
+#specific-project-school-contain, #edit-project-school-contain {
   width: 100%;
   margin-bottom: 15px;
 }
 
-#specific-project-school {
+#specific-project-school, #edit-project-school {
   text-align: center;
   color: black;
 }
@@ -804,6 +804,11 @@ select {
 
 .prev:hover, .next:hover {
   background-color: rgba(0, 0, 0, 0.4);
+}
+
+#edit-project-btn {
+  margin-left: 15px;
+  color: #F0484A;
 }
 
 /* Partner page */

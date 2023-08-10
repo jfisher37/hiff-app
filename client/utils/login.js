@@ -1,3 +1,5 @@
+import { itIsJen } from "./isJen.js";
+
 const login = async (email, password) => {
   const loggedInFrame = await import("../pages/loggedInFrame.js").then(
     async (module) => {
@@ -21,7 +23,13 @@ const login = async (email, password) => {
     },
     body: JSON.stringify(data),
   });
-  const token = await loginJson.json();
+  const loginData = await loginJson.json(); 
+  const token = loginData.token;
+  const loggedEmail = loginData.email;
+
+  if (loggedEmail === "jen@herbie.com") {
+    itIsJen(loggedEmail);
+  }
 
   if (token.message) {
     return token.message;
@@ -30,11 +38,13 @@ const login = async (email, password) => {
     cookieDate.setTime(cookieDate.getTime() + 72 * 60 * 60 * 1000);
     const expires = "expires=" + cookieDate.toUTCString();
     document.cookie = `sessionData` + "=" + token + ";" + expires + ";path=/";
-    // load logged in frame:
-    loggedInFrame();
 
-    //initial load is homepage
-    homepage();
+    // load logged in frame:
+//Then chaining to make sure homepage loads after frame
+loggedInFrame().then(() => {;
+ 
+  //initial load is homepage
+  homepage();});
   }
 };
 

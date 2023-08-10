@@ -13,10 +13,11 @@ const loggedIn = await cookieLogin();
 if (loggedIn) {
 
 // load logged in frame:
-loggedInFrame();
+//Then chaining to make sure homepage loads after frame 
+loggedInFrame().then(() => {;
  
 //initial load is homepage
-homepage();
+homepage();});
 } else {
 
     splashPage();

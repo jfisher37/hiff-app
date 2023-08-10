@@ -1,8 +1,21 @@
 import pageHandler from "../utils/pageHandler.js";
+import isJen from "../utils/isJen.js";
 
 const loggedInFrame = async () => {
 
     const bodyEl = document.getElementById("body");
+
+    let jenTab = "";
+
+    const isJenBool = await isJen();  
+
+    if (isJenBool) {
+        jenTab = `<li data-page="jen">
+        <i class="fa-solid fa-plus"></i>
+        <p>New Project</p>
+      </li>`
+    }
+
 
     // Add logged-in-body class to body, now that it's logged in;
     bodyEl.classList = "logged-in-body";
@@ -28,6 +41,7 @@ const loggedInFrame = async () => {
         <i class="fa-regular fa-handshake"></i>
         <p>Our Partners</p>
       </li>
+      ${jenTab}
     </ul>
   </footer>
     `

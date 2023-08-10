@@ -1,10 +1,17 @@
 import tagGenerator from "../utils/tagGenerator.js";
 import projectPage from "./projectPage.js";
+import { isJen } from "../utils/isJen.js";
 
 let currentPhotoIndex = 0;
 
 const specificProjectPage = async (project) => {
   const mainEl = document.getElementById("main");
+
+  let jensEditor = "";
+
+  if (await isJen()) {
+    jensEditor = `<span id="edit-project-btn"><i class="fa-solid fa-gear"></i></span>`;
+  };
 
   // create tags:
   const tagsArr = tagGenerator(project.tags);
@@ -54,7 +61,7 @@ const specificProjectPage = async (project) => {
   <article id="specific-project-page">
     <ul id="specific-project-info">
       <li id="specific-project-title-contain">
-        <h3 id="specific-project-title">${project.title}</h3>
+        <h3 id="specific-project-title">${project.title}${jensEditor}</h3>
       </li>
       <li id="specific-project-solving-contain">
         <p id="specific-project-solving"><span class="solving-proposal">Solving: </span>${
@@ -102,6 +109,22 @@ const specificProjectPage = async (project) => {
   
       projectPage("closed")
     });
+
+    // edit btn functionality:
+    const editBtnEl = document.getElementById("edit-project-btn");
+
+    if (editBtnEl) {
+
+      const editProjectPage = await import("./editProjectPage.js").then(async (module) => {
+        return await module.default;
+      });
+
+      editBtnEl.addEventListener("click", (e) => {
+        e.preventDefault();
+    
+        editProjectPage(project)
+      });
+    }
 
     //photo enlage functionality: 
     // Inside the specificProjectPage function

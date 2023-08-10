@@ -1,0 +1,120 @@
+import tagGenerator from "../utils/tagGenerator.js";
+
+
+const editProjectPage = async (project) => {
+  const mainEl = document.getElementById("main");
+
+  // create tags:
+  
+  const tagsArr = [];
+
+  if (project.tags) {
+  tagsArr.push(tagGenerator(project.tags));
+  }
+
+  const projectPicGenerator = (photosArr) => {
+    if (photosArr) {
+      const picEls = [];
+
+      for (let i = 0; i < photosArr.length; i++) {
+        const picEl = `
+        <ul class="edit-project-pic-contain">
+                <li class="">
+                <img class="edit-project-pic" src="${photosArr[i]}" alt="User-uploaded photo for ${project.title}">
+              </li>
+              <li class="">
+              <input class="edit-project-pic" value="${photosArr[i]}"></input>
+              </li>
+                </ul>
+                `;
+
+        picEls.push(picEl);
+      }
+
+      const allPics = `
+            <li id="edit-project-pics-contain">
+            <ul id="edit-project-pics">
+                ${picEls.join("")}
+            </ul>
+          </li>
+            `;
+
+      return allPics;
+    } else {
+      return;
+    }
+  };
+
+  const projectPicsEl = projectPicGenerator(project.imgs);
+
+  const editProjectContent = `
+    <div id="close-edit-project-btn-contain">
+    <button id="close-edit-project-btn"><i class="fa-regular fa-circle-left"></i></button>
+  </div>
+  <form id="edit-project-page">
+    <ul id="edit-project-info">
+      <li id="edit-project-title-contain">
+        <input id="edit-project-title" value="${project.title}"></input>
+      </li>
+      <li id="edit-project-solving-contain">
+        <div id="edit-project-solving"><span class="solving-proposal">Solving: </span>
+        <textarea id="edited-solving">${
+            project.solving
+          }</textarea>
+        </div>
+      </li>
+      <li id="edit-project-proposal-contain">
+        <p id="edit-project-proposal"><span class="solving-proposal">Proposal: </span>
+        <textarea id="edited-proposal">${
+          project.proposal
+        }</textarea>
+        </p>
+      </li>
+        ${projectPicsEl}
+    </ul>
+    <aside id="edit-project-sidebar">
+      <ul id="edit-project-sidebar-content">
+        <li id="edit-project-main-img-contain">
+          <img id="edit-project-main-img" src="${
+            project.mainImg
+          }" alt="${project.title}'s primary image">
+        </li>
+        <li id="edit-project-school-contain">
+          <h4 id="edit-project-school">${project.school}</h4>
+        </li>
+        <li id="edit-project-tags-contain">
+          <ul id="edit-project-tags">
+             ${tagsArr.join("")}
+          </ul>
+        </li>
+      </ul>
+    </aside>
+  </form>
+  <aside id="copyright">
+    <p>Copyright © 2023 The Philly Service Award</p>
+  </aside>
+    `;
+
+  mainEl.innerHTML = editProjectContent;
+
+
+if (project) {
+
+    const specificProjectPage = await import("./specificProjectPage.js").then(async (module) => {
+        return await module.default;
+      });
+
+    // close btn functionality:
+    const closeBtnEl = document.getElementById("close-edit-project-btn");
+
+    closeBtnEl.addEventListener("click", (e) => {
+      e.preventDefault();
+  
+      specificProjectPage(project);
+    });
+
+}
+
+};
+
+export default editProjectPage;

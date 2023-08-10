@@ -11,9 +11,12 @@ const authRouter = express.Router();
 
 //authenticate that cookie is good with simple boolean response:
 authRouter.get('/cookieLogin/', authenticationRequired, async (req, res) => {
-  const reply = true;
+  const reply = {
+    'logged': true,
+    'email': req.user.email,
+  }
 
-    res.send(reply);
+    res.json(reply);
   });
 
 authRouter.post("/login/", async (req, res) => {
@@ -45,7 +48,7 @@ authRouter.post("/login/", async (req, res) => {
         expiresAt: new Date(Date.now() + 72 * 60 * 60 * 1000),
       });
 
-      res.json(token.id);
+      res.json({'token': token.id, 'email': user.email});
       return result;
     } else {
       res.json({ message: "Incorrect email or password"});
