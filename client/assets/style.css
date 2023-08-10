@@ -699,7 +699,7 @@ select {
   width: 30%;
 }
 
-.specific-project-pic, .edit-project-pic {
+.specific-project-pic, .edit-project-pic-img, .edit-project-pic-input {
   width: 90%;
   object-fit: cover;
   height: 90%;
@@ -745,6 +745,11 @@ select {
 #specific-project-school, #edit-project-school {
   text-align: center;
   color: black;
+}
+
+#edit-project-tags {
+  display: flex;  
+  flex-direction: column;
 }
 
 /* Enlarged Photo Modal */

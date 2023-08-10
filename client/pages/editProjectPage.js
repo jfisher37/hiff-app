@@ -1,16 +1,7 @@
 import tagGenerator from "../utils/tagGenerator.js";
 
-
 const editProjectPage = async (project) => {
   const mainEl = document.getElementById("main");
-
-  // create tags:
-  
-  const tagsArr = [];
-
-  if (project.tags) {
-  tagsArr.push(tagGenerator(project.tags));
-  }
 
   const projectPicGenerator = (photosArr) => {
     if (photosArr) {
@@ -20,10 +11,10 @@ const editProjectPage = async (project) => {
         const picEl = `
         <ul class="edit-project-pic-contain">
                 <li class="">
-                <img class="edit-project-pic" src="${photosArr[i]}" alt="User-uploaded photo for ${project.title}">
+                <img class="edit-project-pic-img" src="${photosArr[i]}" alt="User-uploaded photo for ${project.title}">
               </li>
               <li class="">
-              <input class="edit-project-pic" value="${photosArr[i]}"></input>
+              <input class="edit-project-pic-input" value="${photosArr[i]}"></input>
               </li>
                 </ul>
                 `;
@@ -58,16 +49,12 @@ const editProjectPage = async (project) => {
       </li>
       <li id="edit-project-solving-contain">
         <div id="edit-project-solving"><span class="solving-proposal">Solving: </span>
-        <textarea id="edited-solving">${
-            project.solving
-          }</textarea>
+        <textarea id="edited-solving">${project.solving}</textarea>
         </div>
       </li>
       <li id="edit-project-proposal-contain">
         <p id="edit-project-proposal"><span class="solving-proposal">Proposal: </span>
-        <textarea id="edited-proposal">${
-          project.proposal
-        }</textarea>
+        <textarea id="edited-proposal">${project.proposal}</textarea>
         </p>
       </li>
         ${projectPicsEl}
@@ -75,16 +62,27 @@ const editProjectPage = async (project) => {
     <aside id="edit-project-sidebar">
       <ul id="edit-project-sidebar-content">
         <li id="edit-project-main-img-contain">
-          <img id="edit-project-main-img" src="${
-            project.mainImg
-          }" alt="${project.title}'s primary image">
+        <ul>
+          <li><img id="edit-project-main-img" src="${project.mainImg}" alt="${project.title}'s primary image"></li>
+          <li class="">
+          <input class="edit-project-main-img-input" value="${project.mainImg}"></input>
+          </li>
+          </ul>
         </li>
         <li id="edit-project-school-contain">
-          <h4 id="edit-project-school">${project.school}</h4>
+          <input id="edit-project-school" value="${project.school}"></input>
         </li>
         <li id="edit-project-tags-contain">
           <ul id="edit-project-tags">
-             ${tagsArr.join("")}
+            <input type="checkbox" class="edit-project-tag-input" id="edit-community-tag" value="community>Community</input>
+            <input type="checkbox" class="edit-project-tag-input" id="edit-education-tag" value="education">Education</input>
+            <input type="checkbox" class="edit-project-tag-input" id="edit-hunger-tag" value="hunger">Hunger</input>
+            <input type="checkbox" class="edit-project-tag-input" id="edit-social-justice-tag" value="social-justice">Social Justice</input>    
+            <input type="checkbox" class="edit-project-tag-input" id="edit-center-city-tag" value="center-city">Center City</input>
+            <input type="checkbox" class="edit-project-tag-input" id="edit-north-philly-tag" value="north-philly">North Philly</input>  
+            <input type="checkbox" class="edit-project-tag-input" id="edit-northeast-philly-tag" value="northeast-philly">Northeast Philly</input>
+            <input type="checkbox" class="edit-project-tag-input" id="edit-south-philly-tag" value="south-philly">South Philly</input>
+            <input type="checkbox" class="edit-project-tag-input" id="edit-west-philly-tag" value="west-philly">West Philly</input>
           </ul>
         </li>
       </ul>
@@ -97,24 +95,33 @@ const editProjectPage = async (project) => {
 
   mainEl.innerHTML = editProjectContent;
 
-
-if (project) {
-
-    const specificProjectPage = await import("./specificProjectPage.js").then(async (module) => {
+  if (project) {
+    const specificProjectPage = await import("./specificProjectPage.js").then(
+      async (module) => {
         return await module.default;
-      });
+      }
+    );
+
+    //select existing tags functionality:
+    const tagInputs = Array.from(
+      document.getElementsByClassName("edit-project-tag-input")
+    );
+
+    tagInputs.forEach((tagInput) => {
+      if (project.tags.includes(tagInput.value)) {
+        tagInput.checked = true;
+      }
+    });
 
     // close btn functionality:
     const closeBtnEl = document.getElementById("close-edit-project-btn");
 
     closeBtnEl.addEventListener("click", (e) => {
       e.preventDefault();
-  
+
       specificProjectPage(project);
     });
-
-}
-
+  }
 };
 
 export default editProjectPage;
