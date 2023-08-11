@@ -35,13 +35,9 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false
     },
-    mainImg: DataTypes.STRING,
-    imgs: DataTypes.ARRAY(DataTypes.STRING),
-    approved: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false
-    },
+    mainImg: DataTypes.TEXT,
+    imgs: DataTypes.ARRAY(DataTypes.TEXT),
+    videos: DataTypes.ARRAY(DataTypes.TEXT),
     createdAt: {
       type: DataTypes.DATE,
       allowNull: false

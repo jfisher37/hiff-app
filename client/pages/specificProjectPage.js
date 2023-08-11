@@ -16,10 +16,11 @@ const specificProjectPage = async (project) => {
   // create tags:
   const tagsArr = tagGenerator(project.tags);
 
-  const projectPicGenerator = (photosArr) => {
-    if (photosArr) {
+  const projectPicGenerator = (photosArr, videoArr) => {
+    if (photosArr || videoArr) {
       const picEls = [];
 
+      if(photosArr) {
       for (let i = 0; i < photosArr.length; i++) {
         const picEl = `
                 <li class="specific-project-pic-contain">
@@ -29,6 +30,18 @@ const specificProjectPage = async (project) => {
 
         picEls.push(picEl);
       }
+    }
+
+    if(videoArr) {
+      for (let i = 0; i < videoArr.length; i++) {
+        const videoEl = `
+                <li class="specific-project-video-contain">
+                <iframe src="${videoArr[i]}" title="User-uploaded video for ${project.title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen class="specific-project-video"></iframe>
+              </li>
+              `;
+        picEls.push(videoEl);
+      }
+    }
 
       const allPics = `
             <li id="specific-project-pics-contain">
@@ -44,7 +57,7 @@ const specificProjectPage = async (project) => {
     }
   };
 
-  const projectPicsEl = projectPicGenerator(project.imgs);
+  const projectPicsEl = projectPicGenerator(project.imgs, project.videos);
 
   const specificProjectContent = `
   <div class="enlarged-photo-modal" id="enlarged-photo-modal">

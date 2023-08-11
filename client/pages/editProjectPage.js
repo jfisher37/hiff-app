@@ -3,8 +3,8 @@ import tagGenerator from "../utils/tagGenerator.js";
 const editProjectPage = async (project) => {
   const mainEl = document.getElementById("main");
 
-  const projectPicGenerator = (photosArr) => {
-    if (photosArr) {
+  const projectPicGenerator = (photosArr, videoArr) => {
+    if (photosArr || videoArr) {
       const picEls = [];
 
       for (let i = 0; i < photosArr.length; i++) {
@@ -19,7 +19,24 @@ const editProjectPage = async (project) => {
                 </ul>
                 `;
 
+
         picEls.push(picEl);
+      }
+
+      if(videoArr) {
+        for (let i = 0; i < videoArr.length; i++) {
+          const videoEl = `
+          <ul class="edit-project-video-contain">
+                  <li class="">
+                  <iframe src="${videoArr[i]}" title="User-uploaded video for ${project.title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen class="edit-project-video-vid"></iframe>
+                </li>
+                <li class="">
+              <input class="edit-project-video-input" value="${videoArr[i]}"></input>
+              </li>
+                </ul>
+                `;
+          picEls.push(videoEl);
+        }
       }
 
       const allPics = `
@@ -36,7 +53,7 @@ const editProjectPage = async (project) => {
     }
   };
 
-  const projectPicsEl = projectPicGenerator(project.imgs);
+  const projectPicsEl = projectPicGenerator(project.imgs, project.videos);
 
   const editProjectContent = `
     <div id="close-edit-project-btn-contain">
@@ -74,16 +91,37 @@ const editProjectPage = async (project) => {
         </li>
         <li id="edit-project-tags-contain">
           <ul id="edit-project-tags">
-            <input type="checkbox" class="edit-project-tag-input" id="edit-community-tag" value="community>Community</input>
+            <li class="edit-project-tag-input-contain">
+            <input type="checkbox" class="edit-project-tag-input" id="edit-community-tag" value="community">Community</input>
+            </li>
+            <li class="edit-project-tag-input-contain">
             <input type="checkbox" class="edit-project-tag-input" id="edit-education-tag" value="education">Education</input>
+            </li>
+            <li class="edit-project-tag-input-contain">
             <input type="checkbox" class="edit-project-tag-input" id="edit-hunger-tag" value="hunger">Hunger</input>
-            <input type="checkbox" class="edit-project-tag-input" id="edit-social-justice-tag" value="social-justice">Social Justice</input>    
+            </li>
+            <li class="edit-project-tag-input-contain">
+            <input type="checkbox" class="edit-project-tag-input" id="edit-social-justice-tag" value="social-justice">Social Justice</input>   
+            </li>
+            <li class="edit-project-tag-input-contain"> 
             <input type="checkbox" class="edit-project-tag-input" id="edit-center-city-tag" value="center-city">Center City</input>
+            </li>
+            <li class="edit-project-tag-input-contain">
             <input type="checkbox" class="edit-project-tag-input" id="edit-north-philly-tag" value="north-philly">North Philly</input>  
+            </li>
+            <li class="edit-project-tag-input-contain">
             <input type="checkbox" class="edit-project-tag-input" id="edit-northeast-philly-tag" value="northeast-philly">Northeast Philly</input>
+            </li>
+            <li class="edit-project-tag-input-contain">
             <input type="checkbox" class="edit-project-tag-input" id="edit-south-philly-tag" value="south-philly">South Philly</input>
+            </li>
+            <li class="edit-project-tag-input-contain">
             <input type="checkbox" class="edit-project-tag-input" id="edit-west-philly-tag" value="west-philly">West Philly</input>
+            </li>
           </ul>
+        </li>
+        <li id="edit-project-submit-contain">
+            <button id="edit-project-submit-btn">Submit</button>    
         </li>
       </ul>
     </aside>
@@ -108,6 +146,7 @@ const editProjectPage = async (project) => {
     );
 
     tagInputs.forEach((tagInput) => {
+      console.log("Project tags: ", project.tags);
       if (project.tags.includes(tagInput.value)) {
         tagInput.checked = true;
       }

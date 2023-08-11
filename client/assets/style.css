@@ -191,7 +191,8 @@ body {
 }
 
 #sign-up-btn,
-#login-btn {
+#login-btn,
+#edit-project-submit-btn {
   margin-right: 25px;
   background-color: var(--secondary);
   color: var(--cream);
@@ -695,14 +696,18 @@ select {
   flex-wrap: wrap;
 }
 
-.specific-project-pic-contain, .edit-project-pic-contain {
+.specific-project-pic-contain, .specific-project-video-contain, .edit-project-pic-contain, .edit-project-video-contain  {
   width: 30%;
 }
 
-.specific-project-pic, .edit-project-pic-img, .edit-project-pic-input {
+.specific-project-pic, .specific-project-video, .edit-project-pic-img, .edit-project-pic-input, .edit-project-video-vid, .edit-project-video-input {
   width: 90%;
   object-fit: cover;
   height: 90%;
+}
+
+.specific-project-pic, #edit-project-btn {
+  cursor: pointer;
 }
 
 
@@ -750,6 +755,10 @@ select {
 #edit-project-tags {
   display: flex;  
   flex-direction: column;
+}
+
+#edit-project-submit-btn {
+  margin-top: 40%;
 }
 
 /* Enlarged Photo Modal */

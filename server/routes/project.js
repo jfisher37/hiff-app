@@ -9,9 +9,8 @@ const projectRouter = express.Router();
 //Create projects:
 projectRouter.post('/create-project', authenticationRequired, async (req, res) => {
     try {
-      const { title, school, proposal, solving, tags, mainImg, imgs } = req.body;
+      const { title, school, proposal, solving, tags, mainImg, imgs, videos } = req.body;
   
-      //TODO: add video field and remove approved field.
       // Create a new project instance with the provided data
       const project = await Project.create({
         title,
@@ -21,7 +20,7 @@ projectRouter.post('/create-project', authenticationRequired, async (req, res) =
         tags,
         mainImg,
         imgs,
-        approved: false, // Default value for "approved" field is set to false
+        videos
       });
   
       res.json({ message: 'Project created successfully', project });
@@ -72,7 +71,7 @@ projectRouter.put('/update-project', authenticationRequired, async (req, res) =>
       }
   
       // Update project information based on req.body
-      const { title, school, proposal, solving, tags, mainImg, imgs, approved } = req.body;
+      const { title, school, proposal, solving, tags, mainImg, imgs, videos } = req.body;
   
       await project.update({
         title,
@@ -82,7 +81,7 @@ projectRouter.put('/update-project', authenticationRequired, async (req, res) =>
         tags,
         mainImg,
         imgs,
-        approved,
+        videos,
       });
   
       res.json({ message: 'Project updated successfully' });
