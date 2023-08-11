@@ -19,11 +19,10 @@ const editProjectPage = async (project) => {
                 </ul>
                 `;
 
-
         picEls.push(picEl);
       }
 
-      if(videoArr) {
+      if (videoArr) {
         for (let i = 0; i < videoArr.length; i++) {
           const videoEl = `
           <ul class="edit-project-video-contain">
@@ -56,9 +55,17 @@ const editProjectPage = async (project) => {
   const projectPicsEl = projectPicGenerator(project.imgs, project.videos);
 
   const editProjectContent = `
-    <div id="close-edit-project-btn-contain">
-    <button id="close-edit-project-btn"><i class="fa-regular fa-circle-left"></i></button>
-  </div>
+  ${(function () {
+    if (project.id) {
+      return `
+  <div id="close-edit-project-btn-contain">
+  <button id="close-edit-project-btn"><i class="fa-regular fa-circle-left"></i></button>
+</div>
+  `;
+    } else {
+      return "";
+    }
+  })()}
   <form id="edit-project-page">
     <ul id="edit-project-info">
       <li id="edit-project-title-contain">
@@ -75,14 +82,42 @@ const editProjectPage = async (project) => {
         </p>
       </li>
         ${projectPicsEl}
+        <ul id="edit-project-add-pics-and-vids">
+        <li class="edit-project-add-pic-contain">
+        <button class="edit-project-add-pic-btn">
+        <ul id="edit-project-add-pic-btn-content> 
+        <li id="edit-project-add-pic-btn-icon">
+        <i class="fa-solid fa-plus"></i>
+        </li>
+        <li id="edit-project-add-pic-btn-text">
+        <p>Add Photo</p>
+        </li>
+        </ul></button>
+        </li>
+        <li class="edit-project-add-video-contain">
+        <button class="edit-project-add-video-btn">
+        <ul id="edit-project-add-video-btn-content>
+        <li id="edit-project-add-video-btn-icon">
+        <i class="fa-solid fa-plus"></i>
+        </li>
+        <li id="edit-project-add-video-btn-text">
+        <p>Add Video</p>
+        </li>
+        </button>
+        </li>
+        </ul>
     </ul>
     <aside id="edit-project-sidebar">
       <ul id="edit-project-sidebar-content">
         <li id="edit-project-main-img-contain">
         <ul>
-          <li><img id="edit-project-main-img" src="${project.mainImg}" alt="${project.title}'s primary image"></li>
+          <li><img id="edit-project-main-img" src="${project.mainImg}" alt="${
+    project.title
+  }'s primary image"></li>
           <li class="">
-          <input class="edit-project-main-img-input" value="${project.mainImg}"></input>
+          <input class="edit-project-main-img-input" value="${
+            project.mainImg
+          }"></input>
           </li>
           </ul>
         </li>
