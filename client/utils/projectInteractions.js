@@ -24,19 +24,16 @@ export const getProjects = async () => {
 
 export const getSingleProject = async (id) => {};
 
-export const createProject = async (
-  title,
-  school,
-  proposal,
-  solving,
-  tags,
-  mainImg,
-  imgs
+export const createProject = async (data
 ) => {
-  //TODO: add video field
+console.log("CREATING", data);
 };
 
-export const updateProject = async (newData) => {};
+export const updateProject = async (newData) => {
+
+  console.log("UPDATING", newData);
+
+};
 
 export const deleteProject = async (id) => {};
 

@@ -1,3 +1,5 @@
+import { createProject, updateProject } from "../utils/projectInteractions.js";
+
 const editProjectPage = async (project) => {
   const mainEl = document.getElementById("main");
 
@@ -143,7 +145,9 @@ const editProjectPage = async (project) => {
             if (project.id) {
               return `
           <img id="edit-project-main-img" src="${project.mainImg}" alt="${project.title}'s primary image">`;
-            } else {return ""};
+            } else {
+              return "";
+            }
           })()}
   </li>
           <li class="">
@@ -210,74 +214,137 @@ const editProjectPage = async (project) => {
 
   mainEl.innerHTML = editProjectContent;
 
-  if (project) {
-    const specificProjectPage = await import("./specificProjectPage.js").then(
-      async (module) => {
-        return await module.default;
-      }
-    );
-
-    //select existing tags functionality:
-    const tagInputs = Array.from(
-      document.getElementsByClassName("edit-project-tag-input")
-    );
-
-    if (project.tags) {
-      tagInputs.forEach((tagInput) => {
-        console.log("Project tags: ", project.tags);
-        if (project.tags.includes(tagInput.value)) {
-          tagInput.checked = true;
-        }
-      });
+  const specificProjectPage = await import("./specificProjectPage.js").then(
+    async (module) => {
+      return await module.default;
     }
+  );
 
-    //add btn functionality:
-    const addPicBtnEl = document.getElementById("edit-project-add-pic-btn");
-    const addVideoBtnEl = document.getElementById("edit-project-add-video-btn");
-    const addPicVideoInputsEl = document.getElementById(
-      "edit-project-add-pic-video-inputs"
-    );
+  //select existing tags functionality:
+  const tagInputs = Array.from(
+    document.getElementsByClassName("edit-project-tag-input")
+  );
 
-    addPicBtnEl.addEventListener("click", (e) => {
-      e.preventDefault();
-      const picInput = `
+  if (project.tags) {
+    tagInputs.forEach((tagInput) => {
+      if (project.tags.includes(tagInput.value)) {
+        tagInput.checked = true;
+      }
+    });
+  }
+
+  //add btn functionality:
+  const addPicBtnEl = document.getElementById("edit-project-add-pic-btn");
+  const addVideoBtnEl = document.getElementById("edit-project-add-video-btn");
+  const addPicVideoInputsEl = document.getElementById(
+    "edit-project-add-pic-video-inputs"
+  );
+
+  addPicBtnEl.addEventListener("click", (e) => {
+    e.preventDefault();
+    const picInput = `
         <li class="edit-project-add-pic-input-contain">
         <input class="edit-project-add-pic-input" placeholder="Add photo URL"></input>
         </li>
         `;
-      addPicVideoInputsEl.insertAdjacentHTML("beforeend", picInput);
-    });
+    addPicVideoInputsEl.insertAdjacentHTML("beforeend", picInput);
+  });
 
-    addVideoBtnEl.addEventListener("click", (e) => {
-      e.preventDefault();
-      const videoInput = `
+  addVideoBtnEl.addEventListener("click", (e) => {
+    e.preventDefault();
+    const videoInput = `
         <li class="edit-project-add-video-input-contain">
         <input class="edit-project-add-video-input" placeholder="Add video URL"></input>
         </li>
         `;
-      addPicVideoInputsEl.insertAdjacentHTML("beforeend", videoInput);
+    addPicVideoInputsEl.insertAdjacentHTML("beforeend", videoInput);
+  });
+
+  //submit btn functionality:
+
+  const submitBtnEl = document.getElementById("edit-project-submit-btn");
+  const titleInputEl = document.getElementById("edit-project-title");
+  const solvingInputEl = document.getElementById("edited-solving");
+  const proposalInputEl = document.getElementById("edited-proposal");
+  const mainImgInputEl = document.getElementById("edit-project-main-img-input");
+  const schoolInputEl = document.getElementById("edit-project-school");
+  const existingPicsEls = Array.from(
+    document.getElementsByClassName("edit-project-pic-input")
+  );
+  const existingVideosEls = Array.from(
+    document.getElementsByClassName("edit-project-video-input")
+  );
+  //NB: tagsInputs is created above.
+
+  submitBtnEl.addEventListener("click", async (e) => {
+    // create these els after their HTML has been created:
+    const addPicsEls = Array.from(
+      document.getElementsByClassName("edit-project-add-pic-input")
+    );
+    const addVideosEls = Array.from(
+      document.getElementsByClassName("edit-project-add-video-input")
+    );
+
+    e.preventDefault();
+    const chosenTitle = titleInputEl.value;
+    const chosenSolving = solvingInputEl.value;
+    const chosenProposal = proposalInputEl.value;
+    const chosenMainImg = mainImgInputEl.value;
+    const chosenSchool = schoolInputEl.value;
+    const chosenTags = [];
+    const chosenPics = [];
+    const chosenVideos = [];
+
+    tagInputs.forEach((tagInput) => {
+      if (tagInput.checked) {
+        chosenTags.push(tagInput.value);
+      }
     });
 
-    //submit btn functionality:
+    existingPicsEls.forEach((picEl) => {
+      chosenPics.push(picEl.value);
+    });
 
-    const submitBtnEl = document.getElementById("edit-project-submit-btn");
-    const titleInputEl = document.getElementById("edit-project-title");
-    const solvingInputEl = document.getElementById("edited-solving");
-    const proposalInputEl = document.getElementById("edited-proposal");
-    const mainImgInputEl = document.getElementsByClassName(
-      "edit-project-main-img-input"
-    )[0];
+    addPicsEls.forEach((picEl) => {
+      chosenPics.push(picEl.value);
+    });
 
-    // close btn functionality:
-    const closeBtnEl = document.getElementById("close-edit-project-btn");
+    existingVideosEls.forEach((videoEl) => {
+      chosenVideos.push(videoEl.value);
+    });
 
-    if (closeBtnEl) {
-      closeBtnEl.addEventListener("click", (e) => {
-        e.preventDefault();
+    addVideosEls.forEach((videoEl) => {
+      chosenVideos.push(videoEl.value);
+    });
 
-        specificProjectPage(project);
-      });
+    const chosenData = {
+      title: chosenTitle,
+      school: chosenSchool,
+      proposal: chosenProposal,
+      solving: chosenSolving,
+      tags: chosenTags,
+      mainImg: chosenMainImg,
+      imgs: chosenPics,
+      videos: chosenVideos,
+    };
+
+    if (project.id) {
+      chosenData.id = project.id;
+      await updateProject(chosenData);
+    } else {
+      await createProject(chosenData);
     }
+  });
+
+  // close btn functionality:
+  const closeBtnEl = document.getElementById("close-edit-project-btn");
+
+  if (closeBtnEl) {
+    closeBtnEl.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      specificProjectPage(project);
+    });
   }
 };
 
