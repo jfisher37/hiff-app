@@ -26,12 +26,39 @@ export const getSingleProject = async (id) => {};
 
 export const createProject = async (data
 ) => {
-console.log("CREATING", data);
+  
+      const url = `/api/create-project/`;
+  
+      const projectJson = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: cookieValue,
+        },
+        body: JSON.stringify(data),
+      });
+  
+      const project = await projectJson.json();
+  
+      return project;
 };
 
 export const updateProject = async (newData) => {
 
-  console.log("UPDATING", newData);
+    const url = `/api/update-project/`;
+
+    const projectJson = await fetch(url, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: cookieValue,
+      },
+      body: JSON.stringify(newData),
+    });
+
+    const project = await projectJson.json();
+
+    return project;
 
 };
 
