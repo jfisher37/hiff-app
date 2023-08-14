@@ -84,7 +84,7 @@ projectRouter.put('/update-project', authenticationRequired, async (req, res) =>
         videos,
       });
   
-      res.json({ message: 'Project updated successfully' });
+      res.json({ message: 'Project updated successfully', project });
     } catch (error) {
       console.error('Error updating project:', error);
       res.status(500).json({ message: 'Internal server error' });

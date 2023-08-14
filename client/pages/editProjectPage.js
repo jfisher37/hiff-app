@@ -302,7 +302,9 @@ const editProjectPage = async (project) => {
     });
 
     existingPicsEls.forEach((picEl) => {
+        if (picEl.value){
       chosenPics.push(picEl.value);
+        }
     });
 
     addPicsEls.forEach((picEl) => {
@@ -310,7 +312,9 @@ const editProjectPage = async (project) => {
     });
 
     existingVideosEls.forEach((videoEl) => {
+        if (videoEl.value){
       chosenVideos.push(videoEl.value);
+        }
     });
 
     addVideosEls.forEach((videoEl) => {
@@ -330,9 +334,17 @@ const editProjectPage = async (project) => {
 
     if (project.id) {
       chosenData.id = project.id;
-      await updateProject(chosenData);
+      const response = await updateProject(chosenData);
+
+        if (response.message === "Project updated successfully") {
+            specificProjectPage(response.project);
+            }
     } else {
-      await createProject(chosenData);
+     const response = await createProject(chosenData);
+
+        if (response.message === "Project created successfully") {
+            specificProjectPage(response.project);
+            }
     }
   });
 
