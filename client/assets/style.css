@@ -192,7 +192,9 @@ body {
 
 #sign-up-btn,
 #login-btn,
-#edit-project-submit-btn {
+#edit-project-submit-btn,
+#edit-project-add-pic-btn,
+#edit-project-add-video-btn {
   margin-right: 25px;
   background-color: var(--secondary);
   color: var(--cream);
@@ -761,6 +763,23 @@ select {
   margin-top: 40%;
 }
 
+#edit-project-add-pics-and-vids-contain {
+  margin-top: 4%; 
+  width: 40%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+#edit-project-add-pics-and-vids {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+
+
 /* Enlarged Photo Modal */
 .enlarged-photo-modal {
   display: none;
@@ -822,7 +841,46 @@ select {
 
 #edit-project-btn {
   margin-left: 15px;
-  color: #F0484A;
+  color: var(--main);
+}
+/* change the color of the add video btn set above */
+#edit-project-add-video-btn {
+  background-color: var(--main)
+}
+
+#edit-project-add-pic-video-inputs-contain {
+  margin-top: 3%;
+  width: 100%;
+}
+
+#edit-project-add-pic-video-inputs {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.edit-project-add-pic-input-contain, .edit-project-add-video-input-contain {
+  margin-bottom: 2%;
+  width: 100%;
+}
+
+.edit-project-add-pic-input, .edit-project-add-video-input {
+  width: 100%;
+  color: black;
+}
+
+.edit-project-add-pic-input::placeholder, .edit-project-add-video-input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: var(--cream);
+  opacity: 1; /* Firefox */
+}
+
+.edit-project-add-pic-input {
+  background-color: var(--secondary);;
+}
+
+.edit-project-add-video-input {
+  background-color: var(--main);
 }
 
 /* Partner page */

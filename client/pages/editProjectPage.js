@@ -1,5 +1,3 @@
-import tagGenerator from "../utils/tagGenerator.js";
-
 const editProjectPage = async (project) => {
   const mainEl = document.getElementById("main");
 
@@ -69,22 +67,47 @@ const editProjectPage = async (project) => {
   <form id="edit-project-page">
     <ul id="edit-project-info">
       <li id="edit-project-title-contain">
-        <input id="edit-project-title" value="${project.title}"></input>
+        <input id="edit-project-title" ${(function () {
+          if (project.id) {
+            return `
+                    value="${project.title}"
+                    `;
+          }
+        })()}" placeholder ="Put title here"></input>
       </li>
       <li id="edit-project-solving-contain">
         <div id="edit-project-solving"><span class="solving-proposal">Solving: </span>
-        <textarea id="edited-solving">${project.solving}</textarea>
+        <textarea id="edited-solving" placeholder="Put solving text here.">${(function () {
+          if (project.id) {
+            return project.solving;
+          } else {
+            return "";
+          }
+        })()}</textarea>
         </div>
       </li>
       <li id="edit-project-proposal-contain">
         <p id="edit-project-proposal"><span class="solving-proposal">Proposal: </span>
-        <textarea id="edited-proposal">${project.proposal}</textarea>
+        <textarea id="edited-proposal" placeholder="Put proposal text here.">${(function () {
+          if (project.id) {
+            return project.proposal;
+          } else {
+            return "";
+          }
+        })()}</textarea>
         </p>
       </li>
-        ${projectPicsEl}
+        ${(function () {
+          if (project.id) {
+            return projectPicsEl;
+          } else {
+            return "";
+          }
+        })()}
+        <li id="edit-project-add-pics-and-vids-contain">
         <ul id="edit-project-add-pics-and-vids">
-        <li class="edit-project-add-pic-contain">
-        <button class="edit-project-add-pic-btn">
+        <li id="edit-project-add-pic-contain">
+        <button id="edit-project-add-pic-btn">
         <ul id="edit-project-add-pic-btn-content> 
         <li id="edit-project-add-pic-btn-icon">
         <i class="fa-solid fa-plus"></i>
@@ -94,8 +117,8 @@ const editProjectPage = async (project) => {
         </li>
         </ul></button>
         </li>
-        <li class="edit-project-add-video-contain">
-        <button class="edit-project-add-video-btn">
+        <li id="edit-project-add-video-contain">
+        <button id="edit-project-add-video-btn">
         <ul id="edit-project-add-video-btn-content>
         <li id="edit-project-add-video-btn-icon">
         <i class="fa-solid fa-plus"></i>
@@ -106,23 +129,42 @@ const editProjectPage = async (project) => {
         </button>
         </li>
         </ul>
+        <li id="edit-project-add-pic-video-inputs-contain">
+        <ul id="edit-project-add-pic-video-inputs">
+        </ul>
+        </li>
     </ul>
     <aside id="edit-project-sidebar">
       <ul id="edit-project-sidebar-content">
         <li id="edit-project-main-img-contain">
         <ul>
-          <li><img id="edit-project-main-img" src="${project.mainImg}" alt="${
-    project.title
-  }'s primary image"></li>
+          <li>
+          ${(function () {
+            if (project.id) {
+              return `
+          <img id="edit-project-main-img" src="${project.mainImg}" alt="${project.title}'s primary image">`;
+            } else {return ""};
+          })()}
+  </li>
           <li class="">
-          <input class="edit-project-main-img-input" value="${
-            project.mainImg
-          }"></input>
+          <input id="edit-project-main-img-input"  ${(function () {
+            if (project.id) {
+              return `
+                      value="${project.mainImg}"
+                      `;
+            }
+          })()}" placeholder="Put main image URL here"></input>
           </li>
           </ul>
         </li>
         <li id="edit-project-school-contain">
-          <input id="edit-project-school" value="${project.school}"></input>
+          <input id="edit-project-school" ${(function () {
+            if (project.id) {
+              return `
+                      value="${project.school}"
+                      `;
+            }
+          })()}" placeholder="Put school name here"></input>
         </li>
         <li id="edit-project-tags-contain">
           <ul id="edit-project-tags">
@@ -180,21 +222,62 @@ const editProjectPage = async (project) => {
       document.getElementsByClassName("edit-project-tag-input")
     );
 
-    tagInputs.forEach((tagInput) => {
-      console.log("Project tags: ", project.tags);
-      if (project.tags.includes(tagInput.value)) {
-        tagInput.checked = true;
-      }
+    if (project.tags) {
+      tagInputs.forEach((tagInput) => {
+        console.log("Project tags: ", project.tags);
+        if (project.tags.includes(tagInput.value)) {
+          tagInput.checked = true;
+        }
+      });
+    }
+
+    //add btn functionality:
+    const addPicBtnEl = document.getElementById("edit-project-add-pic-btn");
+    const addVideoBtnEl = document.getElementById("edit-project-add-video-btn");
+    const addPicVideoInputsEl = document.getElementById(
+      "edit-project-add-pic-video-inputs"
+    );
+
+    addPicBtnEl.addEventListener("click", (e) => {
+      e.preventDefault();
+      const picInput = `
+        <li class="edit-project-add-pic-input-contain">
+        <input class="edit-project-add-pic-input" placeholder="Add photo URL"></input>
+        </li>
+        `;
+      addPicVideoInputsEl.insertAdjacentHTML("beforeend", picInput);
     });
+
+    addVideoBtnEl.addEventListener("click", (e) => {
+      e.preventDefault();
+      const videoInput = `
+        <li class="edit-project-add-video-input-contain">
+        <input class="edit-project-add-video-input" placeholder="Add video URL"></input>
+        </li>
+        `;
+      addPicVideoInputsEl.insertAdjacentHTML("beforeend", videoInput);
+    });
+
+    //submit btn functionality:
+
+    const submitBtnEl = document.getElementById("edit-project-submit-btn");
+    const titleInputEl = document.getElementById("edit-project-title");
+    const solvingInputEl = document.getElementById("edited-solving");
+    const proposalInputEl = document.getElementById("edited-proposal");
+    const mainImgInputEl = document.getElementsByClassName(
+      "edit-project-main-img-input"
+    )[0];
 
     // close btn functionality:
     const closeBtnEl = document.getElementById("close-edit-project-btn");
 
-    closeBtnEl.addEventListener("click", (e) => {
-      e.preventDefault();
+    if (closeBtnEl) {
+      closeBtnEl.addEventListener("click", (e) => {
+        e.preventDefault();
 
-      specificProjectPage(project);
-    });
+        specificProjectPage(project);
+      });
+    }
   }
 };
 
