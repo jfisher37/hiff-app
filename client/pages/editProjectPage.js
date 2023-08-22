@@ -204,6 +204,16 @@ const editProjectPage = async (project) => {
         <li id="edit-project-submit-contain">
             <button id="edit-project-submit-btn">Submit</button>    
         </li>
+        ${(function () {
+            if (project.id) {
+              return `
+          <li id="edit-project-delete-contain">
+             <button id="edit-project-delete-btn">Delete</button> 
+              `;
+            } else {
+              return "";
+            }
+          })()}
       </ul>
     </aside>
   </form>

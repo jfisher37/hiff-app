@@ -193,6 +193,7 @@ body {
 #sign-up-btn,
 #login-btn,
 #edit-project-submit-btn,
+#edit-project-delete-btn,
 #edit-project-add-pic-btn,
 #edit-project-add-video-btn {
   margin-right: 25px;
@@ -312,10 +313,7 @@ footer {
   justify-content: center;
   align-items: center;
   width: 100%;
-}
-
-.homepage-image-contain {
-  width: 33.3333333333%;
+  height: 95%;
 }
 
 /* homepage img lis */
@@ -761,6 +759,12 @@ select {
 
 #edit-project-submit-btn {
   margin-top: 40%;
+}
+
+#edit-project-delete-btn {
+  margin-top: 15%;
+  margin-bottom: 15%;
+  background-color: var(--main);
 }
 
 #edit-project-add-pics-and-vids-contain {
