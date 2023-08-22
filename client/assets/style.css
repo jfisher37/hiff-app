@@ -764,7 +764,7 @@ select {
 #edit-project-delete-btn {
   margin-top: 15%;
   margin-bottom: 15%;
-  background-color: var(--main);
+  background-color: var(--main)
 }
 
 #edit-project-add-pics-and-vids-contain {

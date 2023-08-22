@@ -1,4 +1,4 @@
-import { createProject, updateProject } from "../utils/projectInteractions.js";
+import { createProject, updateProject, deleteProject } from "../utils/projectInteractions.js";
 
 const editProjectPage = async (project) => {
   const mainEl = document.getElementById("main");
@@ -230,6 +230,12 @@ const editProjectPage = async (project) => {
     }
   );
 
+  const projectPage = await import("./projectPage.js").then(
+    async (module) => {
+      return await module.default;
+    }
+  );
+
   //select existing tags functionality:
   const tagInputs = Array.from(
     document.getElementsByClassName("edit-project-tag-input")
@@ -357,6 +363,29 @@ const editProjectPage = async (project) => {
             }
     }
   });
+
+  //delete btn functionality:
+  const deleteBtnEl = document.getElementById("edit-project-delete-btn");
+
+  if (deleteBtnEl) {
+    deleteBtnEl.addEventListener("click", async (e) => {
+      e.preventDefault();
+      const youSure = confirm("Are you sure you want to delete this project?");
+
+      if (youSure) {
+       deleteProject(project.id).then((response) => {
+        if (response) {
+          projectPage("closed");
+          return;
+        } else{
+          return;
+        }
+      })
+       ;
+       
+      }
+    });
+  };
 
   // close btn functionality:
   const closeBtnEl = document.getElementById("close-edit-project-btn");

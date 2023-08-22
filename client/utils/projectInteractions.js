@@ -62,6 +62,27 @@ export const updateProject = async (newData) => {
 
 };
 
-export const deleteProject = async (id) => {};
+export const deleteProject = async (id) => {
+
+    const url = `/api/delete-project/`;
+
+    const deleteJson = await fetch(url, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: cookieValue,
+      },
+      body: JSON.stringify({ id }),
+    });
+
+    const response = await deleteJson.json();
+
+    if (response.message === "Project deleted successfully") {
+      return true;
+    } else {
+      alert("Error deleting project:", response.message);
+      return false;
+    }
+};
 
 export default getProjects;

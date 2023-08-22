@@ -35,6 +35,7 @@ let specificPageOpen = 0;
 
 const projectPage = async (closed) => {
 
+
   // create conditional statement for whether a specfic project page is still open:
   if (closed) {
     specificPageOpen = 0;
