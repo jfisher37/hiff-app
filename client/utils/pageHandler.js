@@ -45,6 +45,9 @@ const pageHandler = async () => {
         if (isJen()) {
           editProjectPage("new");;
         }
+      } else if (icon.dataset.page === "logout") {
+        document.cookie = "sessionData=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        window.location.reload();
       }
     });
   });

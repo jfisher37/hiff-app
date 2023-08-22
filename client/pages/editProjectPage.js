@@ -1,4 +1,8 @@
-import { createProject, updateProject, deleteProject } from "../utils/projectInteractions.js";
+import {
+  createProject,
+  updateProject,
+  deleteProject,
+} from "../utils/projectInteractions.js";
 
 const editProjectPage = async (project) => {
   const mainEl = document.getElementById("main");
@@ -205,15 +209,15 @@ const editProjectPage = async (project) => {
             <button id="edit-project-submit-btn">Submit</button>    
         </li>
         ${(function () {
-            if (project.id) {
-              return `
+          if (project.id) {
+            return `
           <li id="edit-project-delete-contain">
              <button id="edit-project-delete-btn">Delete</button> 
               `;
-            } else {
-              return "";
-            }
-          })()}
+          } else {
+            return "";
+          }
+        })()}
       </ul>
     </aside>
   </form>
@@ -230,11 +234,9 @@ const editProjectPage = async (project) => {
     }
   );
 
-  const projectPage = await import("./projectPage.js").then(
-    async (module) => {
-      return await module.default;
-    }
-  );
+  const projectPage = await import("./projectPage.js").then(async (module) => {
+    return await module.default;
+  });
 
   //select existing tags functionality:
   const tagInputs = Array.from(
@@ -318,9 +320,9 @@ const editProjectPage = async (project) => {
     });
 
     existingPicsEls.forEach((picEl) => {
-        if (picEl.value){
-      chosenPics.push(picEl.value);
-        }
+      if (picEl.value) {
+        chosenPics.push(picEl.value);
+      }
     });
 
     addPicsEls.forEach((picEl) => {
@@ -328,9 +330,9 @@ const editProjectPage = async (project) => {
     });
 
     existingVideosEls.forEach((videoEl) => {
-        if (videoEl.value){
-      chosenVideos.push(videoEl.value);
-        }
+      if (videoEl.value) {
+        chosenVideos.push(videoEl.value);
+      }
     });
 
     addVideosEls.forEach((videoEl) => {
@@ -352,15 +354,29 @@ const editProjectPage = async (project) => {
       chosenData.id = project.id;
       const response = await updateProject(chosenData);
 
-        if (response.message === "Project updated successfully") {
-            specificProjectPage(response.project);
-            }
+      if (response.message === "Project updated successfully") {
+        specificProjectPage(response.project);
+      }
     } else {
-     const response = await createProject(chosenData);
+      const response = await createProject(chosenData);
 
-        if (response.message === "Project created successfully") {
-            specificProjectPage(response.project);
-            }
+      if (response.message === "Project created successfully") {
+
+        //change page icon to select project page:
+        const pageListEl = document.getElementById("footer-list");
+        const pageIconEls = Array.from(pageListEl.getElementsByTagName("li"));
+
+        //change class of selected icon to show its selected
+        pageIconEls.forEach((el) => {
+          if (el.dataset.page === "projects") {
+            el.setAttribute("class", "page-selected");
+          } else {
+            el.removeAttribute("class");
+          }
+        });
+
+        specificProjectPage(response.project);
+      }
     }
   });
 
@@ -373,19 +389,17 @@ const editProjectPage = async (project) => {
       const youSure = confirm("Are you sure you want to delete this project?");
 
       if (youSure) {
-       deleteProject(project.id).then((response) => {
-        if (response) {
-          projectPage("closed");
-          return;
-        } else{
-          return;
-        }
-      })
-       ;
-       
+        deleteProject(project.id).then((response) => {
+          if (response) {
+            projectPage("closed");
+            return;
+          } else {
+            return;
+          }
+        });
       }
     });
-  };
+  }
 
   // close btn functionality:
   const closeBtnEl = document.getElementById("close-edit-project-btn");

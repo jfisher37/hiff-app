@@ -42,6 +42,10 @@ const loggedInFrame = async () => {
         <p>Our Partners</p>
       </li>
       ${jenTab}
+      <li data-page="logout">
+      <i class="fa-solid fa-arrow-right-from-bracket"></i>
+      <p>Logout</p>
+    </li>
     </ul>
   </footer>
     `
