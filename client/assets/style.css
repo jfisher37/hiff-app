@@ -585,7 +585,7 @@ select {
 }
 .education-tag {
   /* TODO: Standardize color: */
-  background-color: rgb(62, 245, 123);
+  background-color: rgb(22, 135, 60);
 }
 .hunger-tag {
   /* TODO: Standardize color: */
@@ -593,7 +593,7 @@ select {
 }
 .social-justice-tag {
   /* TODO: Standardize color: */
-  background-color: rgb(249, 199, 74);
+  background-color: rgb(192, 146, 31);
 }
 .center-city-tag {
   /* TODO: Standardize color: */

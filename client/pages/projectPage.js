@@ -4,7 +4,7 @@ import { getProjects } from "../utils/projectInteractions.js"
 
 //Set default filter and sort
 let filter = "allProjects";
-let sort = "newest";
+let sort = "az";
 let windowYOffset = 0;
 
 //What filters and sort are selected
@@ -23,8 +23,8 @@ const filterSelection = {
 };
 
 const sortSelection = {
-  newest: "selected",
-  oldest: "",
+  az: "selected",
+  za: "",
 };
 
 // var for whether or not specific page is open. Default to false
@@ -141,8 +141,8 @@ const projectPage = async (closed) => {
         </li>
         <li id="project-sort-li">
           <select name="project-sort-select">
-            <option ${sortSelection.newest} value="newest">Newest First</option>
-            <option ${sortSelection.oldest} value="oldest">Oldest First</option>
+            <option ${sortSelection.az} value="az">A-Z</option>
+            <option ${sortSelection.za} value="za">Z-A</option>
           </select>
         </li>
       </ul>
@@ -188,10 +188,10 @@ const projectPage = async (closed) => {
 
   const cardSorter = (cardsArr, filter, sort) => {
     const sortCards = (filteredCards) => {
-      if (sort === "newest") {  
-        return filteredCards.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-      } else if (sort === "oldest") {
-        return filteredCards.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+      if (sort === "az") {
+        return filteredCards.sort((a, b) => a.title.localeCompare(b.title));
+      } else if (sort === "za") {
+        return filteredCards.sort((a, b) => b.title.localeCompare(a.title));
       }
     };
 
