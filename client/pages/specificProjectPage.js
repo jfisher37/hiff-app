@@ -1,16 +1,26 @@
 import tagGenerator from "../utils/tagGenerator.js";
 import projectPage from "./projectPage.js";
+import { isJen } from "../utils/isJen.js";
+
+let currentPhotoIndex = 0;
 
 const specificProjectPage = async (project) => {
   const mainEl = document.getElementById("main");
 
+  let jensEditor = "";
+
+  if (await isJen()) {
+    jensEditor = `<span id="edit-project-btn"><i class="fa-solid fa-gear"></i></span>`;
+  };
+
   // create tags:
   const tagsArr = tagGenerator(project.tags);
 
-  const projectPicGenerator = (photosArr) => {
-    if (photosArr) {
+  const projectPicGenerator = (photosArr, videoArr) => {
+    if (photosArr || videoArr) {
       const picEls = [];
 
+      if(photosArr) {
       for (let i = 0; i < photosArr.length; i++) {
         const picEl = `
                 <li class="specific-project-pic-contain">
@@ -20,6 +30,18 @@ const specificProjectPage = async (project) => {
 
         picEls.push(picEl);
       }
+    }
+
+    if(videoArr) {
+      for (let i = 0; i < videoArr.length; i++) {
+        const videoEl = `
+                <li class="specific-project-video-contain">
+                <iframe src="${videoArr[i]}" title="User-uploaded video for ${project.title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen class="specific-project-video"></iframe>
+              </li>
+              `;
+        picEls.push(videoEl);
+      }
+    }
 
       const allPics = `
             <li id="specific-project-pics-contain">
@@ -35,16 +57,24 @@ const specificProjectPage = async (project) => {
     }
   };
 
-  const projectPicsEl = projectPicGenerator(project.photos);
+  const projectPicsEl = projectPicGenerator(project.imgs, project.videos);
 
   const specificProjectContent = `
+  <div class="enlarged-photo-modal" id="enlarged-photo-modal">
+  <span class="modal-close" id="modal-close">&times;</span>
+  <div class="modal-content">
+    <img class="enlarged-photo" id="enlarged-photo" src="" alt="Enlarged Photo">
+    <a class="prev" id="prev">&#10094;</a>
+    <a class="next" id="next">&#10095;</a>
+  </div>
+</div>
     <div id="close-specific-project-btn-contain">
     <button id="close-specific-project-btn"><i class="fa-regular fa-circle-left"></i></button>
   </div>
   <article id="specific-project-page">
     <ul id="specific-project-info">
       <li id="specific-project-title-contain">
-        <h3 id="specific-project-title">${project.title}</h3>
+        <h3 id="specific-project-title">${project.title}${jensEditor}</h3>
       </li>
       <li id="specific-project-solving-contain">
         <p id="specific-project-solving"><span class="solving-proposal">Solving: </span>${
@@ -61,25 +91,13 @@ const specificProjectPage = async (project) => {
     </ul>
     <aside id="specific-project-sidebar">
       <ul id="specific-project-sidebar-content">
-        <li id="specific-project-profile-pic-contain">
-          <img id="specific-project-profile-pic" src="${
-            project.profilePic
-          }" alt="${project.firstName} ${project.lastName}'s profile picture">
-        </li>
-        <li id="specific-project-profile-name-contain">
-          <h4 id="specific-project-profile-name">${project.firstName} ${
-    project.lastName
-  }</h4>
+        <li id="specific-project-main-img-contain">
+          <img id="specific-project-main-img" src="${
+            project.mainImg
+          }" alt="${project.title}'s primary image">
         </li>
         <li id="specific-project-school-contain">
-          <p id="specific-project-school"><span class="school-budget">School: </span>${
-            project.school
-          }</p>
-        </li>
-        <li id="specific-project-budget-contain">
-          <p id="specific-project-budget"><span class="school-budget">Budget: </span>$${
-            project.budget
-          }</p>
+          <h4 id="specific-project-school">${project.school}</h4>
         </li>
         <li id="specific-project-tags-contain">
           <ul id="specific-project-tags">
@@ -104,6 +122,65 @@ const specificProjectPage = async (project) => {
   
       projectPage("closed")
     });
+
+    // edit btn functionality:
+    const editBtnEl = document.getElementById("edit-project-btn");
+
+    if (editBtnEl) {
+
+      const editProjectPage = await import("./editProjectPage.js").then(async (module) => {
+        return await module.default;
+      });
+
+      editBtnEl.addEventListener("click", (e) => {
+        e.preventDefault();
+    
+        editProjectPage(project)
+      });
+    }
+
+    //photo enlage functionality: 
+    // Inside the specificProjectPage function
+const photoContainers = document.querySelectorAll(".specific-project-pic-contain");
+const enlargedPhotoModal = document.getElementById("enlarged-photo-modal");
+const enlargedPhoto = document.getElementById("enlarged-photo");
+const modalCloseBtn = document.getElementById("modal-close");
+const prevBtn = document.getElementById("prev");
+const nextBtn = document.getElementById("next");
+
+// Open the modal and show the clicked image
+photoContainers.forEach((container, index) => {
+  const img = container.querySelector(".specific-project-pic");
+  img.addEventListener("click", () => {
+    currentPhotoIndex = index;
+    enlargedPhoto.src = img.src;
+    enlargedPhotoModal.style.display = "block";
+  });
+});
+
+// Close the modal
+modalCloseBtn.addEventListener("click", () => {
+  enlargedPhotoModal.style.display = "none";
+});
+
+// Navigate to the previous photo
+prevBtn.addEventListener("click", () => {
+  currentPhotoIndex = (currentPhotoIndex - 1 + photoContainers.length) % photoContainers.length;
+  enlargedPhoto.src = photoContainers[currentPhotoIndex].querySelector(".specific-project-pic").src;
+});
+
+// Navigate to the next photo
+nextBtn.addEventListener("click", () => {
+  currentPhotoIndex = (currentPhotoIndex + 1) % photoContainers.length;
+  enlargedPhoto.src = photoContainers[currentPhotoIndex].querySelector(".specific-project-pic").src;
+});
+
+// Close modal when clicking outside the photo
+window.addEventListener("click", (event) => {
+  if (event.target === enlargedPhotoModal) {
+    enlargedPhotoModal.style.display = "none";
+  }
+});
 };
 
 export default specificProjectPage;

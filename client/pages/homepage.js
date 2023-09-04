@@ -11,20 +11,6 @@ const homepage = async () => {
         alt="Placeholder Image"
       />
     </li>
-    <li class="homepage-image-contain">
-      <img
-        class="homepage-image"
-        src="./assets/images/placeholder_300x300.jpeg"
-        alt="Placeholder Image"
-      />
-    </li>
-    <li class="homepage-image-contain">
-      <img
-        class="homepage-image"
-        src="./assets/images/placeholder_300x300.jpeg"
-        alt="Placeholder Image"
-      />
-    </li>
   </ul>
   <article id="about-us">
     <h2 id="about-us-title">About Us</h2>

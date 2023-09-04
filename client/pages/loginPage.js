@@ -10,9 +10,9 @@ const loginPage = async () => {
       </div>
       <form id="login-form">
       <ul id="login-inputs">
-        <li id="login-username">
-          <label for="username">Username:</label>
-          <input class="login-input" name="username">
+        <li id="login-email">
+          <label for="email">Email:</label>
+          <input class="login-input" name="email">
         </li>
         <li id="login-password">
           <label for="password">Password:</label>
@@ -36,13 +36,13 @@ const loginPage = async () => {
   });
 
   // TODO: de-comment when login function is built
-  // const login = await import("../utils/login.js").then(async (module) => {
-  //   return await module.default;
-  // });
+  const login = await import("../utils/login.js").then(async (module) => {
+    return await module.default;
+  });
 
   //input els
-  const usernameLi = document.getElementById("login-username");
-  const usernameInput = usernameLi.getElementsByTagName("input")[0];
+  const emailLi = document.getElementById("login-email");
+  const emailInput = emailLi.getElementsByTagName("input")[0];
 
   const passwordLi = document.getElementById("login-password");
   const passwordInput = passwordLi.getElementsByTagName("input")[0];
@@ -55,15 +55,13 @@ const loginPage = async () => {
   loginBtnEl.addEventListener("click", async (e) => {
     e.preventDefault();
 
-    console.log("LOGIN COMING");
-
     // TODO: de-comment when login function is created
-    //pass username and pw into login.js
-    // const res = await login(usernameInput.value, passwordInput.value);
+    //pass email and pw into login.js
+    const res = await login(emailInput.value, passwordInput.value);
 
-    // if (res) {
-    //   errorMessageEl.innerHTML = res;
-    // };
+    if (res) {
+      errorMessageEl.innerHTML = res;
+    };
   });
 
   // btn to load sign up page.

@@ -1,3 +1,5 @@
+import { isJen } from "./isJen.js";
+
 const pageHandler = async () => {
   //create relevant dom els
   const pageListEl = document.getElementById("footer-list");
@@ -15,6 +17,11 @@ const pageHandler = async () => {
   const partnerPage = await import("../pages/partnerPage.js").then(async (module) => {
     return await module.default;
   });
+
+  const editProjectPage = await import("../pages/editProjectPage.js").then(async (module) => {
+    return await module.default;
+  });
+
 
   //creates onClicks for footer icons
   pageIconEls.forEach((icon) => {
@@ -34,7 +41,14 @@ const pageHandler = async () => {
         projectPage();
       } else if (icon.dataset.page === "partners") {
         partnerPage();
-      } 
+      } else if (icon.dataset.page === "jen") {
+        if (isJen()) {
+          editProjectPage("new");;
+        }
+      } else if (icon.dataset.page === "logout") {
+        document.cookie = "sessionData=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        window.location.reload();
+      }
     });
   });
 };
